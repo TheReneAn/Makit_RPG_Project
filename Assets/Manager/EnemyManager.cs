@@ -4,15 +4,40 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    #region Singleton
+    private static EnemyManager instance = null;
+
+    // Don't destroy
+    private void Awake()
     {
-        
+        if (null == instance)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    // singleton
+    public static EnemyManager Instance
     {
-        
+        get
+        {
+            if (null == instance)
+            {
+                return null;
+            }
+            return instance;
+        }
     }
+    #endregion
+
+    // Teddy part
+
+
+
+    // Rene part
 }
