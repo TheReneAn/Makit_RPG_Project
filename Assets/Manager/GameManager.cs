@@ -46,11 +46,15 @@ public class GameManager : MonoBehaviour
     public int g_PlayerHP = 100;
     public int g_PlayerMP = 100;
 
+
     // Rene variable
 
 
 
     // Teddy Function
+
+
+
 
     // scene change function
     public void SceneChange(string levelName)

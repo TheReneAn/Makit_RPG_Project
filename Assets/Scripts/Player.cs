@@ -12,9 +12,14 @@ public class Player : MonoBehaviour
     private float m_Vertical;           // player vertical moving
     private bool m_IsHorizontalMove;    // player horizontal or not bool value
 
+    private Vector3 vector;
+    private BoxCollider2D boxCollider;
+    public LayerMask layerMask;         // Non-passable layer settings.
+
     void Start()
     {
         m_Rigid = GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
     }
 
     void Update()
@@ -29,47 +34,60 @@ public class Player : MonoBehaviour
         bool hUp = Input.GetButtonUp("Horizontal");
         bool vUp = Input.GetButtonUp("Vertical");
 
-        // Making dicision horizontal or not
-        if(hDown)
-        {
-            m_IsHorizontalMove = true;
-            m_Anim.SetBool("Idle", false);
-        }
-        else if (vDown)
-        {
-            m_IsHorizontalMove = false;
-            m_Anim.SetBool("Idle", false);
-        }
-        else
-        {
-            m_Anim.SetBool("Idle", true);
-        }
+        // Check obstacles
+        RaycastHit2D hit;   // hit = Null or obstacle
+        Vector2 start = transform.position;      // The current location value of the character
+        // The location value that the character wants to move to.
+        Vector2 end = start + new Vector2(vector.x * m_Speed, vector.y * m_Speed);
 
-        // player idle check
-        if(m_Vertical == 0 && m_Horizontal == 0)
-        {
-            m_Anim.SetBool("Idle", true);
-        }
-        else
-        {
-            m_Anim.SetBool("Idle", false);
-        }
+        boxCollider.enabled = false;
+        hit = Physics2D.Linecast(start, end, layerMask);
+        boxCollider.enabled = true;
 
-        // player moving animation
-        if(m_Anim.GetInteger("HorizontalMove") != m_Horizontal)
+        if (hit.transform == null)
         {
-            m_Anim.SetBool("IsChange", true);
-            m_Anim.SetInteger("HorizontalMove", (int)m_Horizontal);
-        }
-        else if (m_Anim.GetInteger("VerticalMove") != m_Vertical)
-        {
-            m_Anim.SetBool("IsChange", true);
-            m_Anim.SetInteger("VerticalMove", (int)m_Vertical);
-        }
-        else
-        {
-            m_Anim.SetBool("IsChange", false);
-        }
+            // Making dicision horizontal or not
+            if (hDown)
+            {
+                m_IsHorizontalMove = true;
+                m_Anim.SetBool("Idle", false);
+            }
+            else if (vDown)
+            {
+                m_IsHorizontalMove = false;
+                m_Anim.SetBool("Idle", false);
+            }
+            else
+            {
+                m_Anim.SetBool("Idle", true);
+            }
+
+            // player idle check
+            if (m_Vertical == 0 && m_Horizontal == 0)
+            {
+                m_Anim.SetBool("Idle", true);
+            }
+            else
+            {
+                m_Anim.SetBool("Idle", false);
+            }
+
+            // player moving animation
+            if (m_Anim.GetInteger("HorizontalMove") != m_Horizontal)
+            {
+                m_Anim.SetBool("IsChange", true);
+                m_Anim.SetInteger("HorizontalMove", (int)m_Horizontal);
+            }
+            else if (m_Anim.GetInteger("VerticalMove") != m_Vertical)
+            {
+                m_Anim.SetBool("IsChange", true);
+                m_Anim.SetInteger("VerticalMove", (int)m_Vertical);
+            }
+            else
+            {
+                m_Anim.SetBool("IsChange", false);
+            }
+        }   
         
     }
 
