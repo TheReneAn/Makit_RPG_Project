@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Village.unity
+    guid: ba686a2e7f2f8eb4e8b11b03f03dcf3d
+  - enabled: 1
     path: Assets/Scenes/MainScreen.unity
     guid: 733562c223fa3f842933f117e91c98ac
   - enabled: 1
@@ -15,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Opening.unity
     guid: ebfe66e5252e82141addd699d82444d3
   - enabled: 1
-    path: Assets/Scenes/Village.unity
-    guid: ba686a2e7f2f8eb4e8b11b03f03dcf3d
+    path: Assets/Scenes/Field.unity
+    guid: 6222451494fa3994798b4abc85d64f72
+  - enabled: 1
+    path: Assets/Scenes/Scenario.unity
+    guid: 5bfa7fddd91928c43bd9e941defc0aa9
   m_configObjects: {}

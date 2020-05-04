@@ -45,6 +45,13 @@ public class GameManager : MonoBehaviour
     public int g_PlayerAvd = 0;
     public int g_PlayerHP = 100;
     public int g_PlayerMP = 100;
+    public int g_PlayerCurrentHP = 100;
+    public int g_PlayerCurrentMP = 100;
+    public int g_PlayerLevel = 1;
+    public int g_PlayerEXP = 0;
+    public int g_Money = 0;
+    public int g_CurrentSceneNum = 0;
+    public Vector2 g_PlayerPosition;
 
 
     // Rene variable

@@ -8,8 +8,8 @@ public class Player : MonoBehaviour
     public Animator m_Anim;             // player animator
 
     private Rigidbody2D m_Rigid;        // player rigidbody
-    private float m_Horizontal;         // player horizontal moving
-    private float m_Vertical;           // player vertical moving
+    public float m_Horizontal;         // player horizontal moving
+    public float m_Vertical;           // player vertical moving
     private bool m_IsHorizontalMove;    // player horizontal or not bool value
 
     private Vector3 vector;
@@ -31,8 +31,6 @@ public class Player : MonoBehaviour
         // check button up and down
         bool hDown = Input.GetButtonDown("Horizontal");
         bool vDown = Input.GetButtonDown("Vertical");
-        bool hUp = Input.GetButtonUp("Horizontal");
-        bool vUp = Input.GetButtonUp("Vertical");
 
         // Check obstacles
         RaycastHit2D hit;   // hit = Null or obstacle

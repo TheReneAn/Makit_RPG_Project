@@ -18169,7 +18169,7 @@ MonoBehaviour:
   m_Atk: 1
   m_AtkDelay: 1
   m_Player: {fileID: 1935593906}
-  speed: 0.02
+  m_Speed: 0.02
 --- !u!212 &516133728
 SpriteRenderer:
   m_ObjectHideFlags: 0

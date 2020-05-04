@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Items")]
 [System.Serializable]
+
 public class Item
 {
     public int itemID;      // The unique ID value of the item.
