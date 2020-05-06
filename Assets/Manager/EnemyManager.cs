@@ -35,8 +35,24 @@ public class EnemyManager : MonoBehaviour
     }
     #endregion
 
-    // Teddy part
+    public GameObject[] gameObj;
+    public GameObject enemy;
 
+    // Teddy part
+    void Start()
+    {
+        // making enemy (prefab instantiate)
+        for (int i = 0; i < gameObj.Length; i++)
+        {
+            Instantiate(enemy, gameObj[i].transform.position, Quaternion.identity);
+        }
+    }
+
+
+    void Update()
+    {
+        
+    }
 
 
     // Rene part

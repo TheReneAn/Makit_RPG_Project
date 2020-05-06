@@ -37,21 +37,21 @@ public class GameManager : MonoBehaviour
     #endregion
 
     // Teddy variable
-    public int g_PlayerStr = 5;
-    public int g_PlayerDex = 5;
-    public int g_PlayerCon = 5;
-    public int g_PlayerAtk = 0;
-    public int g_PlayerDef = 0;
-    public int g_PlayerAvd = 0;
-    public int g_PlayerHP = 100;
-    public int g_PlayerMP = 100;
-    public int g_PlayerCurrentHP = 100;
-    public int g_PlayerCurrentMP = 100;
-    public int g_PlayerLevel = 1;
-    public int g_PlayerEXP = 0;
-    public int g_Money = 0;
-    public int g_CurrentSceneNum = 0;
-    public Vector2 g_PlayerPosition;
+    public int g_PlayerStr = 5;             // player status Str 
+    public int g_PlayerDex = 5;             // player status dex
+    public int g_PlayerCon = 5;             // player status con
+    public int g_PlayerAtk = 0;             // player total attak 
+    public int g_PlayerDef = 0;             // player total def
+    public int g_PlayerAvd = 0;             // player total avoid
+    public int g_PlayerHP = 100;            // player max hp
+    public int g_PlayerMP = 100;            // player max np
+    public int g_PlayerCurrentHP = 100;     // player current hp
+    public int g_PlayerCurrentMP = 100;     // player current mp
+    public int g_PlayerLevel = 1;           // player level
+    public int g_PlayerEXP = 0;             // player exprience
+    public int g_Money = 0;                 // player money
+    public int g_CurrentSceneNum = 0;       // current scene number
+    public Vector2 g_PlayerPosition;        // player position
 
 
     // Rene variable

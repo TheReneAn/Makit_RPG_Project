@@ -1,98 +1,269 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float m_Speed;               // player speed
-    public Animator m_Anim;             // player animator
+    public float m_Speed;       // player m_Speed
+    public Animator m_Anim;     // player animator
+    public Vector3 m_Vector;    // player move vector
 
-    private Rigidbody2D m_Rigid;        // player rigidbody
-    public float m_Horizontal;         // player horizontal moving
-    public float m_Vertical;           // player vertical moving
-    private bool m_IsHorizontalMove;    // player horizontal or not bool value
-
-    private Vector3 vector;
-    private BoxCollider2D boxCollider;
-    public LayerMask layerMask;         // Non-passable layer settings.
+    public bool m_CanMove;
+    public bool m_NotMove;
+    public bool m_CanAtk;
+    public RaycastHit2D rayHit;
+    private Vector3 m_DirVec;
+    private float m_CurTime;
+    private float m_CoolTime = 0.5f;
+    private Enemy enemy;
 
     void Start()
     {
-        m_Rigid = GetComponent<Rigidbody2D>();
-        boxCollider = GetComponent<BoxCollider2D>();
+        // init data
+        m_CanMove = true;
+        m_NotMove = false;
+        m_CanAtk = true;
+        enemy = GetComponent<Enemy>();
+        GameManager.Instance.g_PlayerAtk = GameManager.Instance.g_PlayerStr * 2;
     }
 
     void Update()
     {
-        // check move
-        m_Horizontal = Input.GetAxisRaw("Horizontal");
-        m_Vertical = Input.GetAxisRaw("Vertical");
-
-        // check button up and down
-        bool hDown = Input.GetButtonDown("Horizontal");
-        bool vDown = Input.GetButtonDown("Vertical");
-
-        // Check obstacles
-        RaycastHit2D hit;   // hit = Null or obstacle
-        Vector2 start = transform.position;      // The current location value of the character
-        // The location value that the character wants to move to.
-        Vector2 end = start + new Vector2(vector.x * m_Speed, vector.y * m_Speed);
-
-        boxCollider.enabled = false;
-        hit = Physics2D.Linecast(start, end, layerMask);
-        boxCollider.enabled = true;
-
-        if (hit.transform == null)
+        // player idle check
+        if (m_Vector.x == 0 && m_Vector.y == 0)
         {
-            // Making dicision horizontal or not
-            if (hDown)
+            m_Anim.SetBool("Idle", true);
+        }
+        else
+        {
+            m_Anim.SetBool("Idle", false);
+        }
+
+        // not need func (for test)
+        // move vertical and horizontal
+        if (m_CanMove && !m_NotMove)
+        {
+            if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
             {
-                m_IsHorizontalMove = true;
-                m_Anim.SetBool("Idle", false);
-            }
-            else if (vDown)
-            {
-                m_IsHorizontalMove = false;
-                m_Anim.SetBool("Idle", false);
+                m_Vector.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), transform.position.z);
+
+                if (m_Vector.x != 0)
+                {
+                    transform.Translate(m_Vector.x * m_Speed, 0, 0);
+                }
+                else if (m_Vector.y != 0)
+                {
+                    transform.Translate(0, m_Vector.y * m_Speed, 0);
+                }
             }
             else
             {
-                m_Anim.SetBool("Idle", true);
+                m_Vector.Set(0, 0, 0);
+            }
+        }
+
+        // player moving animation
+        if (m_Anim.GetInteger("HorizontalMove") != m_Vector.x)
+        {
+            m_Anim.SetBool("IsChange", true);
+            m_Anim.SetInteger("HorizontalMove", (int)m_Vector.x);
+        }
+        else if (m_Anim.GetInteger("VerticalMove") != m_Vector.y)
+        {
+            m_Anim.SetBool("IsChange", true);
+            m_Anim.SetInteger("VerticalMove", (int)m_Vector.y);
+        }
+        else
+        {
+            m_Anim.SetBool("IsChange", false);
+        }
+
+        // draw ray direction
+        if (m_Vector.x == 1)
+        {
+            m_DirVec = Vector3.right;
+        }
+        else if (m_Vector.x == -1)
+        {
+            m_DirVec = Vector3.left;
+        }
+        else if (m_Vector.y == 1)
+        {
+            m_DirVec = Vector3.up;
+        }
+        else if (m_Vector.y == -1)
+        {
+            m_DirVec = Vector3.down;
+        }
+    }
+
+    // action func
+    public void Action()
+    {
+        m_CanMove = false;
+        m_Anim.SetTrigger("Atk");
+    }
+
+    public void Move()
+    {
+        m_NotMove = false;
+    }
+
+    public void NotMove()
+    {
+        m_NotMove = true;
+    }
+
+    public void AttackRay()
+    {
+        // raycasy physics
+        rayHit = Physics2D.Raycast(transform.position, m_DirVec, 1.2f, LayerMask.GetMask("Enemy"));
+
+        if (rayHit)
+        {
+            // enemy hit knock back
+            rayHit.collider.gameObject.transform.position =
+            new Vector2(rayHit.collider.gameObject.transform.position.x + m_DirVec.x / 2,
+            rayHit.collider.gameObject.transform.position.y + m_DirVec.y / 2);
+
+            // enemy damage
+            rayHit.collider.gameObject.GetComponent<Enemy>().IsHit();
+        }
+    }
+
+    public void CanMove()
+    {
+        m_CanMove = true;
+    }
+
+    // skill 1 func
+    public void Skill1()
+    {
+    }
+
+    // skill 2 func
+    public void Skill2()
+    {
+
+    }
+
+    // final skill func
+    public void UltimateSkill()
+    {
+
+    }
+
+    // d-pad moving functions
+    public void LeftMove()
+    {
+        m_DirVec = Vector3.left;
+        if (m_CanMove && !m_NotMove)
+        {
+            m_Vector.Set(-1, 0, 0);
+
+            if (m_Vector.x != 0)
+            {
+                transform.Translate(m_Vector.x * m_Speed, 0, 0);
+            }
+            else if (m_Vector.y != 0)
+            {
+                transform.Translate(0, m_Vector.y * m_Speed, 0);
             }
 
-            // player idle check
-            if (m_Vertical == 0 && m_Horizontal == 0)
-            {
-                m_Anim.SetBool("Idle", true);
-            }
-            else
-            {
-                m_Anim.SetBool("Idle", false);
-            }
-
-            // player moving animation
-            if (m_Anim.GetInteger("HorizontalMove") != m_Horizontal)
+            if (m_Anim.GetInteger("HorizontalMove") != -1)
             {
                 m_Anim.SetBool("IsChange", true);
-                m_Anim.SetInteger("HorizontalMove", (int)m_Horizontal);
-            }
-            else if (m_Anim.GetInteger("VerticalMove") != m_Vertical)
-            {
-                m_Anim.SetBool("IsChange", true);
-                m_Anim.SetInteger("VerticalMove", (int)m_Vertical);
+                m_Anim.SetInteger("HorizontalMove", -1);
             }
             else
             {
                 m_Anim.SetBool("IsChange", false);
             }
-        }   
-        
+        }
     }
 
-    void FixedUpdate()
+    public void TopMove()
     {
-        // player position move
-        Vector2 moveVec = m_IsHorizontalMove ? new Vector2(m_Horizontal, 0) : new Vector2(0, m_Vertical);
-        m_Rigid.velocity = moveVec * m_Speed;
+        m_DirVec = Vector3.up;
+        if (m_CanMove && !m_NotMove)
+        {
+            m_Vector.Set(0, 1, 0);
+
+            if (m_Vector.x != 0)
+            {
+                transform.Translate(m_Vector.x * m_Speed, 0, 0);
+            }
+            else if (m_Vector.y != 0)
+            {
+                transform.Translate(0, m_Vector.y * m_Speed, 0);
+            }
+
+            if (m_Anim.GetInteger("VerticalMove") != 1)
+            {
+                m_Anim.SetBool("IsChange", true);
+                m_Anim.SetInteger("VerticalMove", 1);
+            }
+            else
+            {
+                m_Anim.SetBool("IsChange", false);
+            }
+        }
+    }
+
+    public void DownMove()
+    {
+        m_DirVec = Vector3.down;
+        if (m_CanMove && !m_NotMove)
+        {
+            m_Vector.Set(0, -1, 0);
+
+            if (m_Vector.x != 0)
+            {
+                transform.Translate(m_Vector.x * m_Speed, 0, 0);
+            }
+            else if (m_Vector.y != 0)
+            {
+                transform.Translate(0, m_Vector.y * m_Speed, 0);
+            }
+
+            if (m_Anim.GetInteger("VerticalMove") != -1)
+            {
+                m_Anim.SetBool("IsChange", true);
+                m_Anim.SetInteger("VerticalMove", -1);
+            }
+            else
+            {
+                m_Anim.SetBool("IsChange", false);
+            }
+        }
+    }
+
+    public void RightMove()
+    {
+        m_DirVec = Vector3.right;
+        if (m_CanMove && !m_NotMove)
+        {
+            m_Vector.Set(1, 0, 0);
+
+            if (m_Vector.x != 0)
+            {
+                transform.Translate(m_Vector.x * m_Speed, 0, 0);
+            }
+            else if (m_Vector.y != 0)
+            {
+                transform.Translate(0, m_Vector.y * m_Speed, 0);
+            }
+
+            if (m_Anim.GetInteger("HorizontalMove") != 1)
+            {
+                m_Anim.SetBool("IsChange", true);
+                m_Anim.SetInteger("HorizontalMove", 1);
+            }
+            else
+            {
+                m_Anim.SetBool("IsChange", false);
+            }
+        }
     }
 }

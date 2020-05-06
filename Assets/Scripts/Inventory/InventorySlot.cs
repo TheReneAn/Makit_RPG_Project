@@ -7,7 +7,6 @@ public class InventorySlot : MonoBehaviour
 {
     public Image icon;
     public Text itemCount_Text;
-    public GameObject selected_Item;
 
     public void Additem(Item _item)
     {

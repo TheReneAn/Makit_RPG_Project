@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Items")]
 [System.Serializable]
 
 public class Item
@@ -30,6 +29,6 @@ public class Item
         itemDescription = _itemDes;
         itemType = _itemType;
         itemCount = _itemCount;
-        itemIcon = Resources.Load("Items/" + _itemName, typeof(Sprite)) as Sprite;
+        itemIcon = Resources.Load("ItemIcon/" + _itemName, typeof(Sprite)) as Sprite;
     }
 }
