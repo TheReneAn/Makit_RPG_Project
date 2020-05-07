@@ -10,6 +10,8 @@ public class Inventory : MonoBehaviour
     public GameObject inventoryPanel;   //  Inventory open & close
     private bool activeInventory = false;
 
+    public Text coin_text;
+
     // Audio
     private AudioManager theAudio;
     public string open_sound;
@@ -91,6 +93,8 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
+        coin_text.text = string.Format("{0:n0}", GameManager.Instance.g_Money);
+
         if (!stopKeyInput)
         {
             if (Input.GetKeyDown(KeyCode.I))
@@ -115,16 +119,34 @@ public class Inventory : MonoBehaviour
             {
                 ShowItem();
 
-                if (Input.GetMouseButtonDown(0)) // Select a item
-                {
-                    theAudio.Play(click_sound);
-                    stopKeyInput = true;
-                    // Use Question (Ex. really want to drink the potion?)
+                //if (Input.GetMouseButtonDown(0)) // Select a item
+                //{
+                //    theAudio.Play(click_sound);
+                //    stopKeyInput = true;
+                //    // Use Question (Ex. really want to drink the potion?)
 
-                    // Equip Question (Ex. really want to drink the potion?)
+                //    // Equip Question (Ex. really want to drink the potion?)
 
-                }
+                //}
             }
+        }
+    }
+
+    public void ActiveInventory ()
+    {
+        activeInventory = !activeInventory;
+
+        if (activeInventory)
+        {
+            theAudio.Play(open_sound);
+            player.NotMove();
+            inventoryPanel.SetActive(true);
+        }
+        else
+        {
+            theAudio.Play(cancel_sound);
+            inventoryPanel.SetActive(false);
+            player.Move();
         }
     }
 }
