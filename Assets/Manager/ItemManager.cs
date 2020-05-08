@@ -39,6 +39,9 @@ public class ItemManager : MonoBehaviour
 
     void Start()
     {
+        // Coin
+        itemList.Add(new Item(999999, "Golden Coin", "A Coin made of gold", Item.ItemType.Coin));
+
         // Use (Potion)
         itemList.Add(new Item(100001, "Small Red Potion", "A miracle potion that restores 50 HP", Item.ItemType.Use));
         itemList.Add(new Item(100002, "Medium Red Potion", "A miracle potion that restores 150 HP", Item.ItemType.Use));

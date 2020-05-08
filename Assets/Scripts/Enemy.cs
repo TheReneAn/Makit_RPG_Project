@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     public float m_AtkRange;             // enemy attack range
     public GameObject m_FindImage;       // enemy emphasize image (aggro)
     public Animator m_Anim;
+    public GameObject m_HPsprite;
 
     private GameObject m_Player;         // player object
     private Vector2 m_PlayerPos;         // player position
@@ -47,7 +48,6 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(m_EnemyCurHP);
         // compare before action
         m_PrevState = m_CurState;
         m_Anim.SetBool("IsChange", false); // for animation one shot
@@ -63,7 +63,9 @@ public class Enemy : MonoBehaviour
             {
                 if (NearPlayer()) // player aggro check
                 {
+                    m_HPsprite.SetActive(true);  // hp guage on
                     m_FindImage.SetActive(true); // aggro enphasize image - on
+
                     // attack range check
                     if (AtkPlayer())
                         Attack(); // attack player
@@ -73,6 +75,7 @@ public class Enemy : MonoBehaviour
                 else
                 {
                     m_FindImage.SetActive(false); // aggro enphasize image - off
+                    m_HPsprite.SetActive(false);  // hp guage off
                     RandomMove();   // random move
                 }
                 m_TimeCount = 0;    // timer init
@@ -180,11 +183,15 @@ public class Enemy : MonoBehaviour
     public void IsHit()
     {
         m_EnemyCurHP -= GameManager.Instance.g_PlayerAtk;
+        m_HPsprite.transform.localScale = new Vector3(((float)m_EnemyCurHP / (float)m_EnemyHP), 
+            m_HPsprite.transform.localScale.y, m_HPsprite.transform.localScale.z);
     }
 
     // die sequence
     void IsDie()
     {
+        m_HPsprite.SetActive(false);
+        m_FindImage.SetActive(false);
         m_CurState = ENEMYSTATE.DIE;
         ChangeAnimation("IsDie", true);
         m_CanMove = false;

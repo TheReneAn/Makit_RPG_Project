@@ -5,11 +5,17 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    public static Inventory instance;
     public Player player;
+    private OkorCancel theOOC;
 
+    // Panel
     public GameObject inventoryPanel;   //  Inventory open & close
     private bool activeInventory = false;
+    public GameObject OkorcanclePanel;  // Question open & close
+    private bool SelectItem_Actived = false;
 
+    // Coin
     public Text coin_text;
 
     // Audio
@@ -24,6 +30,9 @@ public class Inventory : MonoBehaviour
     public Transform itemsParent;    // Slot's Parents object 
     private List<Item> inventoryItemList;   // Player's item list
 
+    public string thisItemType;
+    public int thisItemID;
+
     private bool stopKeyInput = false;  // Key input limit 
                                         // in the ask question window when a player use a item
 
@@ -31,11 +40,99 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
+        instance = this;
+
         player.GetComponent<Player>();
+        theOOC = FindObjectOfType<OkorCancel>();
 
         theAudio = FindObjectOfType<AudioManager>();
         inventoryItemList = new List<Item>();
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+    }
+
+    void Update()
+    {
+        coin_text.text = string.Format("{0:n0}", GameManager.Instance.g_Money);
+
+        if (!stopKeyInput)
+        {
+            if (activeInventory)
+            {
+                // Display item lists
+                ShowItem();
+
+                if (SelectItem_Actived) // Select slot and Show Okay or Cancel
+                {
+                    StartCoroutine(OOCCoroution());
+                }   
+            }
+        }
+    }
+
+    public void ActiveInventory()
+    {
+        if (!stopKeyInput)
+        {
+            activeInventory = !activeInventory;
+
+            if (activeInventory)
+            {
+                theAudio.Play(open_sound);
+                player.CanNotMove();
+                inventoryPanel.SetActive(true);
+            }
+            else
+            {
+                theAudio.Play(cancel_sound);
+                inventoryPanel.SetActive(false);
+                player.CanMove();
+            }
+        }
+    }
+
+    public void GetAnItem(int _itemID, string itemType, int _count = 1)
+    {
+        // Search item database
+        for (int i = 0; i < ItemManager.Instance.itemList.Count; i++)
+        {
+            // Check if there is a matching item 
+            if (_itemID == ItemManager.Instance.itemList[i].itemID)
+            {
+                // Item Type is Coin
+                if (itemType == Item.ItemType.Coin.ToString())
+                {
+                    GameManager.Instance.g_Money += _count;
+                    return;
+                }
+
+                // Am I already have the item?
+                for (int j = 0; j < inventoryItemList.Count; j++)
+                {
+                    if (inventoryItemList[j].itemID == _itemID)
+                    {
+                        // Item Type is Use, Quest
+                        if ((inventoryItemList[j].itemType == Item.ItemType.Use) ||
+                           (inventoryItemList[j].itemType == Item.ItemType.Quest))
+                        {
+                            inventoryItemList[j].itemCount += _count;
+                        }
+                        // Item Type is Equip
+                        if (inventoryItemList[j].itemType == Item.ItemType.Equip)
+                        {
+                            inventoryItemList.Add(ItemManager.Instance.itemList[i]);
+                        }
+                        return;
+                    }
+                }
+
+                // I don't have the item
+                inventoryItemList.Add(ItemManager.Instance.itemList[i]);
+                inventoryItemList[inventoryItemList.Count - 1].itemCount = _count;
+                return;
+            }
+        }
+
+        Debug.LogError("No item with that ID.");
     }
 
     public void ShowItem()
@@ -58,95 +155,50 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    //public void SelectedItem()
-    //{
-    //    Color color = slots[0].selected_Item.GetComponent<Image>().color;
-    //    color.a = 0f;
-    //    for (int i = 0; i < inventoryItemList.Count; i++)
-    //    {
-    //        slots[i].selected_Item.GetComponent<Image>().color = color;
-    //        StartCoroutine(SelectedItemEffectCoroutine());
-    //    }
-    //}
-
-    //IEnumerator SelectedItemEffectCoroutine()
-    //{
-    //    while (itemActivated)
-    //    {
-    //        Color color = slots[0].GetComponent<Image>().color;
-    //        while (color.a < 0.5f)
-    //        {
-    //            color.a += 0.03f;
-    //            slots[selectedItem].selected_Item.GetComponent<Image>().color = color;
-    //            yield return waitTime;
-    //        }
-    //        while (color.a > 0f)
-    //        {
-    //            color.a -= 0.03f;
-    //            slots[selectedItem].selected_Item.GetComponent<Image>().color = color;
-    //            yield return waitTime;
-    //        }
-    //    }
-
-    //    yield return new WaitForSeconds(0.03f);
-    //}
-
-    void Update()
+    public void SelectItem(Item _thisItem)  // From InventorySlot 
     {
-        coin_text.text = string.Format("{0:n0}", GameManager.Instance.g_Money);
+        theAudio.Play(click_sound);
+        stopKeyInput = true;
+        
+        thisItemType = _thisItem.itemType.ToString();
+        thisItemID = _thisItem.itemID;
 
-        if (!stopKeyInput)
-        {
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                activeInventory = !activeInventory;
-
-                if (activeInventory)
-                {
-                    theAudio.Play(open_sound);
-                    player.NotMove();
-                    inventoryPanel.SetActive(true);
-                }
-                else
-                {
-                    theAudio.Play(cancel_sound);
-                    inventoryPanel.SetActive(false);
-                    player.Move();
-                }
-            }
-
-            if (activeInventory)
-            {
-                ShowItem();
-
-                //if (Input.GetMouseButtonDown(0)) // Select a item
-                //{
-                //    theAudio.Play(click_sound);
-                //    stopKeyInput = true;
-                //    // Use Question (Ex. really want to drink the potion?)
-
-                //    // Equip Question (Ex. really want to drink the potion?)
-
-                //}
-            }
-        }
+        SelectItem_Actived = true;
     }
 
-    public void ActiveInventory ()
+    IEnumerator OOCCoroution()
     {
-        activeInventory = !activeInventory;
+        OkorcanclePanel.SetActive(true);
+        theOOC.activated = true;
+        
+        yield return new WaitUntil(() => !theOOC.activated);
 
-        if (activeInventory)
+        if (theOOC.GetResult()) // Okay btn (Want to use)
         {
-            theAudio.Play(open_sound);
-            player.NotMove();
-            inventoryPanel.SetActive(true);
+            // Search Item list
+            for (int i = 0; i < inventoryItemList.Count; i++)
+            {
+                // Check itemID between the slot's item id and  the inventory item id.
+                if (inventoryItemList[i].itemID == thisItemID)
+                {
+                    // If the item has counts
+                    if (inventoryItemList[i].itemCount > 1)
+                    {
+                        inventoryItemList[i].itemCount--;
+                    }
+                    // If the item hasn't counts
+                    else
+                    {
+                        inventoryItemList.RemoveAt(i);
+                    }
+
+                    ShowItem();
+                    break;
+                }
+            }
         }
-        else
-        {
-            theAudio.Play(cancel_sound);
-            inventoryPanel.SetActive(false);
-            player.Move();
-        }
+
+        stopKeyInput = false;
+        OkorcanclePanel.SetActive(false);
     }
 }
