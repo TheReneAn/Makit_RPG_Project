@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DPadController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class DPadController : MonoBehaviour
 {
     public Player player;
     public float temp;
-    public bool m_IsCanMove = true;
+    public bool m_CanControl;
     public bool m_LeftMove;
     public bool m_TopMove;
     public bool m_DownMove;
@@ -26,84 +26,54 @@ public class DPadController : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         {
             player.LeftMove();
         }
-        if (m_TopMove)
+        else if (m_TopMove)
         {
             player.TopMove();
         }
-        if (m_DownMove)
+        else if (m_DownMove)
         {
             player.DownMove();
         }
-        if (m_RightMove)
+        else if (m_RightMove)
         {
             player.RightMove();
+        }
+        else
+        {
+            player.Idle();
         }
     }
 
     public void LeftGetBottonDown()
     {
-        if (m_IsCanMove)
-        {
             m_LeftMove = true;
-        }
     }
     public void RightGetBottonDown()
     {
-        if (m_IsCanMove)
-        {
             m_RightMove = true;
-        }
     }
     public void TopGetBottonDown()
     {
-        if (m_IsCanMove)
-        {
             m_TopMove = true;
-        }
     }
     public void DownGetBottonDown()
     {
-        if (m_IsCanMove)
-        {
             m_DownMove = true;
-        }
     }
     public void LeftGetBottonUp()
     {
-        if (m_IsCanMove)
-        {
             m_LeftMove = false;
-        }
     }
     public void RightGetBottonUp()
     {
-        if (m_IsCanMove)
-        {
             m_RightMove = false;
-        }
     }
     public void TopGetBottonUp()
     {
-        if (m_IsCanMove)
-        {
             m_TopMove = false;
-        }
     }
     public void DownGetBottonUp()
     {
-        if (m_IsCanMove)
-        {
             m_DownMove = false;
-        }
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        m_IsCanMove = true;
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        m_IsCanMove = false;
     }
 }

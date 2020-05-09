@@ -43,6 +43,7 @@ public class DialogueManager : MonoBehaviour
     public SpriteRenderer m_DialogueWindowRenderer;     // dialogue windows
     public GameObject m_DiagMgrObj;
 
+    private Player m_Player;                            // player
     private List<string> m_ListSentence;                // context list
     private List<string> m_ListNames;                   // name list
     private List<Sprite> m_ListSprites;                 // portrait list
@@ -62,6 +63,7 @@ public class DialogueManager : MonoBehaviour
         m_ListNames = new List<string>();
         m_ListSprites = new List<Sprite>();
         m_DiagMgrObj.SetActive(false);
+        m_Player = FindObjectOfType<Player>();
     }
 
     // dialogue open
@@ -70,6 +72,9 @@ public class DialogueManager : MonoBehaviour
         m_DiagMgrObj.SetActive(true);
         // check talking on
         m_IsTalking = true;
+
+        // player controll off
+        m_Player.CanNotControl();
 
         // add dialogue list 
         for (int i = 0; i < diag.sentences.Length; i++)
@@ -94,6 +99,8 @@ public class DialogueManager : MonoBehaviour
 
         m_IsTalking = false;
         m_DiagMgrObj.SetActive(false);
+        // player controll on
+        m_Player.CanControl();
     }
 
     // typing alphabet
@@ -133,7 +140,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (m_IsTalking)
         {
-            if (Input.GetKeyDown(KeyCode.Z)) // next sentence
+            if (Input.touchCount > 0 || Input.GetMouseButtonDown(0)) // next sentence
             {
                 m_Count++;
                 m_Text.text = ""; // init context

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class OkorCancel : MonoBehaviour
 {
+    private Inventory thisInventory;
+
     private AudioManager theAudio;
     public string enter_sound;
     public string Okay_sound;
@@ -12,12 +14,13 @@ public class OkorCancel : MonoBehaviour
 
     public Text Text_Iventory_Question;
 
-    public bool activated;                      // Panel activated
     private bool result = true;                 // okay = true, cancel = false
 
     // Start is called before the first frame update
     void Start()
     {
+        thisInventory = FindObjectOfType<Inventory>();
+
         theAudio = FindObjectOfType<AudioManager>();
         theAudio.Play(enter_sound);
     }
@@ -31,24 +34,25 @@ public class OkorCancel : MonoBehaviour
     public void Click_Ok()
     {
         theAudio.Play(Okay_sound);
-        activated = false;
+        result = true;
+        thisInventory.OkorCanclePanel.SetActive(false);
     }
 
     public void Click_Cancle()
     {
         theAudio.Play(cancel_sound);
-        activated = false;
         result = false;
+        thisInventory.OkorCanclePanel.SetActive(false);
     }
 
     public void ShowQuestionText()
     {
-        if (Inventory.instance.thisItemType == "Use")
+        if (thisInventory.currentItem.itemType.ToString() == "Use")
         {
             Text_Iventory_Question.text = "Would you like to use the item?";
         }
 
-        if (Inventory.instance.thisItemType == "Equip")
+        if (thisInventory.currentItem.itemType.ToString() == "Equip")
         {
             Text_Iventory_Question.text = "Would you like to wear the equipment?";
         }
@@ -58,4 +62,5 @@ public class OkorCancel : MonoBehaviour
     {
         return result;  // ok = true, cancel = false
     }
+
 }

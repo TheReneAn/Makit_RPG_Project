@@ -20,6 +20,7 @@ public class SkillDamage : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.gameObject.GetComponent<Enemy>().m_EnemyCurHP -= GameManager.Instance.g_PlayerAtk * 3;
+        if(collision!= null)
+           collision.gameObject.GetComponent<Enemy>().m_EnemyCurHP -= GameManager.Instance.g_PlayerAtk * 3;
     }
 }

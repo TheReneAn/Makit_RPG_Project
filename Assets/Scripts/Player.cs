@@ -5,22 +5,24 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float m_Speed;       // player m_Speed
-    public float m_ManaCoolTime;// mana regene speed
-    public Animator m_Anim;     // player animator
-    public Vector3 m_Vector;    // player move vector
-    public GameObject m_SkillDamage;
-    public GameObject m_LackOfMansText;
-    public GameObject m_SkillParticle;
-
-    public bool m_CanMove;
-    public bool m_CanAtk;
-    public RaycastHit2D rayHit;
-    private Vector3 m_DirVec;
-    private float m_CurTime;
-    private Enemy enemy;
-
-    private float temp;
+    public float m_Speed;                   // player m_Speed
+    public float m_ManaCoolTime;            // mana regene speed
+    public Animator m_Anim;                 // player animator
+    public Vector3 m_Vector;                // player move vector
+    public GameObject m_SkillDamage;        // skill damage collider
+    public GameObject m_LackOfManaText;     // not enough mana text
+    public GameObject m_SkillParticle;      // skill effect
+    public GameObject m_ControlPad;         // control pad 
+    public GameObject m_Skill1Obj;          // skill 1 Obj
+    public GameObject m_Skill2Obj;          // skill 1 Obj
+    public GameObject m_UltimateObj;        // skill 1 Obj  
+    public bool m_IsPlayerField;            // where is player? 0 - Village, 1 - Field
+    public bool m_CanMove;                  // can move or not
+    public bool m_CanAtk;                   // can attack or not
+    public RaycastHit2D rayHit;             // attack ray
+    private Vector3 m_DirVec;               // attack ray direction
+    private float m_CurTime;                // manaregen current time
+    private Enemy enemy;                    // enemy
 
     void Start()
     {
@@ -33,7 +35,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        m_Anim.SetBool("IsChange", false);
         // mana regenerate
         if (GameManager.Instance.g_PlayerCurrentMP != GameManager.Instance.g_PlayerMP)
         {
@@ -46,8 +47,10 @@ public class Player : MonoBehaviour
             }
         }
 
+        m_Anim.SetBool("IsChange", false);
+
         // player idle check
-        if (m_Vector.x == 0 && m_Vector.y == 0)
+        if (m_Anim.GetInteger("HorizontalMove") == 0 && m_Anim.GetInteger("VerticalMove") == 0)
         {
             m_Anim.SetBool("Idle", true);
         }
@@ -55,30 +58,6 @@ public class Player : MonoBehaviour
         {
             m_Anim.SetBool("Idle", false);
         }
-
-        // ******** not need func (for test - When it open, it should be delete)
-        // move vertical and horizontal
-        if (m_CanMove)
-        {
-            if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
-            {
-                m_Vector.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), transform.position.z);
-
-                if (m_Vector.x != 0)
-                {
-                    transform.Translate(m_Vector.x * m_Speed, 0, 0);
-                }
-                else if (m_Vector.y != 0)
-                {
-                    transform.Translate(0, m_Vector.y * m_Speed, 0);
-                }
-            }
-            else
-            {
-                m_Vector.Set(0, 0, 0);
-            }
-        }
-        // ********* until here need to delete
 
         // player moving animation
         if (m_Anim.GetInteger("HorizontalMove") != m_Vector.x)
@@ -115,17 +94,70 @@ public class Player : MonoBehaviour
         }
 
         // if text activate, it will destory
-        if(m_LackOfMansText.activeSelf)
+        if(m_LackOfManaText.activeSelf)
         {
             Invoke("NotEnoughManaDestroy", 1.0f);
         }
+
+        Debug.Log(GameManager.Instance.g_PlayerLevel);
+
+        // test code for event manager
+        if(Input.GetKeyDown(KeyCode.D))
+        {
+            EventManager.Instance.PlayerMoveRight(5.0f);
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            EventManager.Instance.PlayerMoveLeft(5.0f);
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            EventManager.Instance.PlayerMoveUp(5.0f);
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            EventManager.Instance.PlayerMoveDown(5.0f);
+        }
+        // ******** not need func (for test - When it open, it should be delete)
+        // move vertical and horizontal
+        //if (m_CanMove)
+        //{
+        //    if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        //    {
+        //        m_Vector.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), transform.position.z);
+
+        //        if (m_Vector.x != 0)
+        //        {
+        //            transform.Translate(m_Vector.x * m_Speed, 0, 0);
+        //        }
+        //        else if (m_Vector.y != 0)
+        //        {
+        //            transform.Translate(0, m_Vector.y * m_Speed, 0);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        m_Vector.Set(0, 0, 0);
+        //    }
+        //}
+        // ********* until here need to delete
+
     }
 
     // action func
     public void Action()
     {
-        m_CanMove = false;
-        m_Anim.SetTrigger("Atk");
+        if(m_IsPlayerField)
+        {
+            // Field function
+            m_CanMove = false;
+            m_Anim.SetTrigger("Atk");
+        }
+        else
+        {
+            // Village function
+
+        }
     }
 
     public void AttackRay()
@@ -142,8 +174,18 @@ public class Player : MonoBehaviour
 
             // enemy damage
             rayHit.collider.gameObject.GetComponent<Enemy>().IsHit();
+            if(rayHit.collider.gameObject.GetComponent<Enemy>().m_EnemyCurHP <= 0)
+            {
+                GameManager.Instance.g_PlayerEXP += rayHit.collider.gameObject.GetComponent<Enemy>().m_EXP;
+                if(GameManager.Instance.g_PlayerEXP > 100)
+                {
+                    GameManager.Instance.g_PlayerLevel++;
+                }
+            }
         }
     }
+
+    
 
     // player moving control
     public void CanMove()
@@ -155,10 +197,20 @@ public class Player : MonoBehaviour
         m_CanMove = false;
     }
 
+    // player D pad control
+    public void CanControl()
+    {
+        m_ControlPad.SetActive(true);
+    }
+    public void CanNotControl()
+    {
+        m_ControlPad.SetActive(false);
+    }
+
     // notenoughtmana text destroy
     void NotEnoughManaDestroy()
     {
-        m_LackOfMansText.SetActive(false);
+        m_LackOfManaText.SetActive(false);
     }
 
     // skill 1 func
@@ -173,7 +225,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            m_LackOfMansText.SetActive(true);
+            m_LackOfManaText.SetActive(true);
         }
     }
 
@@ -304,5 +356,21 @@ public class Player : MonoBehaviour
                 m_Anim.SetBool("IsChange", false);
             }
         }
+    }
+
+    public void Idle()
+    {
+         m_Vector.Set(0, 0, 0);
+         
+         if (m_Anim.GetInteger("HorizontalMove") != 0)
+         {
+             m_Anim.SetBool("IsChange", true);
+             m_Anim.SetInteger("HorizontalMove", 0);
+             m_Anim.SetInteger("VerticalMove", 0);
+         }
+         else
+         {
+             m_Anim.SetBool("IsChange", false);
+         }
     }
 }

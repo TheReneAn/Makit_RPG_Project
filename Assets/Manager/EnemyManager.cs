@@ -1,6 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+enum ENEMYSPECIES // Enemy state enum
+{
+    GOBLIN,
+    SLIME,
+    WOLF
+}
 
 public class EnemyManager : MonoBehaviour
 {
@@ -37,7 +43,6 @@ public class EnemyManager : MonoBehaviour
 
     public GameObject[] gameObj;
     public GameObject enemy;
-
     // Teddy part
     void Start()
     {

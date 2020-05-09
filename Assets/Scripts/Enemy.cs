@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     public int m_EnemyHP;                // enemy HP
     public int m_EnemyCurHP;             // enemy HP
     public int m_Atk;                    // enemy atk damage
+    public int m_EXP;                    // enemy Exp
     public float m_Speed;                // enemy speed
     public float m_Aggro;                // enemy aggro range
     public float m_AtkRange;             // enemy attack range

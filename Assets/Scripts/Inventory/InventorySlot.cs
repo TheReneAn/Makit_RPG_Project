@@ -5,46 +5,68 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
+    [Header("UI Stuff to change")]
+    public Image itemIcon;
+    public Text itemCount;
+
+    [Header("Variables from the item")]
     public Item thisItem;
-    public string thisItemType;
+    public Inventory thisInventory;
 
-    // Display
-    public Image icon;
-    public Text itemCount_Text;
+    private bool Useable = false;
 
-    public string itemType;
-
-    public void Additem(Item _item)
+    public void Setup (Item newItem, Inventory newInventory)
     {
-        thisItem = _item;
+        thisItem = newItem;
+        thisInventory = newInventory;
 
-        icon.sprite = _item.itemIcon;
-        if (Item.ItemType.Use == _item.itemType)
+        if (thisItem)
         {
-            if (_item.itemCount > 0)
-            {
-                itemCount_Text.text = _item.itemCount.ToString();
-            }
-            else
-            {
-                itemCount_Text.text = "";
-            }
+            itemIcon.sprite = thisItem.itemIcon;
+            itemCount.text = "" + thisItem.itemCount;
         }
-    }
-
-    public void RemoveItem()
-    {
-        icon.sprite = null;
-        itemCount_Text.text = "";
-    }
-
-    public string GetitemType()
-    {
-        return thisItemType = thisItem.itemType.ToString();
     }
 
     public void ClickedOn()
     {
-        Inventory.instance.SelectItem(thisItem);
+        if (thisItem)
+        {
+            Useable = true;
+            thisInventory.ClickItemSlot(Useable, thisItem);
+        }
     }
+
+    //public void Additem(Item _item)
+    //{
+    //    thisItem = _item;
+
+    //    icon.sprite = _item.itemIcon;
+    //    if (Item.ItemType.Use == _item.itemType)
+    //    {
+    //        if (_item.itemCount > 0)
+    //        {
+    //            itemCount_Text.text = _item.itemCount.ToString();
+    //        }
+    //        else
+    //        {
+    //            itemCount_Text.text = "";
+    //        }
+    //    }
+    //}
+
+    //public void RemoveItem()
+    //{
+    //    icon.sprite = null;
+    //    itemCount_Text.text = "";
+    //}
+
+    //public string GetitemType()
+    //{
+    //    return thisItemType = thisItem.itemType.ToString();
+    //}
+
+    //public void ClickedOn()
+    //{
+    //    Inventory.instance.SelectItem(thisItem);
+    //}
 }

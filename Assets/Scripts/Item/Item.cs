@@ -2,20 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-// [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Items")]
-[System.Serializable]
-public class Item 
+[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Items")]
+public class Item : ScriptableObject
 {
-    public int itemID;      // The unique ID value of the item.
-    public string itemName; // The name of the item.
+    public int itemID;              // The unique ID value of the item.
+    public string itemName;         // The name of the item.
     public string itemDescription;
-    public int itemCount;   // Number of items in possession
+    public int itemCount = 1;       // Number of items in possession
     public Sprite itemIcon;
 
     public ItemType itemType;
-    public string _itemType;
-
     public enum ItemType
     {
         Use,
@@ -24,13 +22,10 @@ public class Item
         Coin
     }
 
-    public Item(int _itemId, string _itemName, string _itemDes, ItemType _itemType, int _itemCount = 1)
+    public UnityEvent thisEvent;
+    public void Use()
     {
-        itemID = _itemId;
-        itemName = _itemName;
-        itemDescription = _itemDes;
-        itemType = _itemType;
-        itemCount = _itemCount;
-        itemIcon = Resources.Load("ItemIcon/" + _itemName, typeof(Sprite)) as Sprite;
+        Debug.Log("Using Item");
+        thisEvent.Invoke();
     }
 }

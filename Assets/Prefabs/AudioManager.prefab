@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4825522265556579769
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4825522265556579771}
+  - component: {fileID: 4825522265556579768}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4825522265556579771
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4825522265556579769}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.690044, y: 0.4165623, z: 0.068359375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4825522265556579768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4825522265556579769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f1c108084717d64c8ce9f54c0bb393a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Inven_open
+    clip: {fileID: 8300000, guid: 41294a047f4331d4a8e5b9f41a02a59b, type: 3}
+    Volumn: 0
+    loop: 0
+  - name: Inven_close
+    clip: {fileID: 8300000, guid: b660367ca7417c448b8de89d43037517, type: 3}
+    Volumn: 0
+    loop: 0
+  - name: coin
+    clip: {fileID: 8300000, guid: faa960025033cd84b96f9599f09cfbb2, type: 3}
+    Volumn: 0
+    loop: 0
+  - name: Q_panel_open
+    clip: {fileID: 8300000, guid: 22794d42ee7a98841bfb6b1b699e05eb, type: 3}
+    Volumn: 0
+    loop: 0
+  - name: Yes
+    clip: {fileID: 8300000, guid: c68641b94f40b07449644cf4bc1bb6da, type: 3}
+    Volumn: 0
+    loop: 0
+  - name: Q_panel_close
+    clip: {fileID: 8300000, guid: d17db651745b6c945af7a2e372c20aef, type: 3}
+    Volumn: 0
+    loop: 0
