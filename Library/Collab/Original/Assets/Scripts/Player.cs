@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,28 +7,27 @@ public class Player : MonoBehaviour
     public float m_Speed;       // player m_Speed
     public Animator m_Anim;     // player animator
     public Vector3 m_Vector;    // player move vector
-
     public bool m_CanMove;
-    public bool m_NotMove;
     public bool m_CanAtk;
     public RaycastHit2D rayHit;
-    private Vector3 m_DirVec;
+
     private float m_CurTime;
     private float m_CoolTime = 0.5f;
+    private Vector3 m_DirVec;
 
     void Start()
     {
         m_CanMove = true;
-        m_NotMove = false;
         m_CanAtk = true;
 
-        m_Anim = GetComponent<Animator>();
     }
 
+    void FixedUpdate()
+    {
+
+    }
     void Update()
     {
-        Debug.DrawRay(this.transform.position, m_DirVec * 1.2f, new Color(1, 0, 0));
-
         // player idle check
         if (m_Vector.x == 0 && m_Vector.y == 0)
         {
@@ -42,7 +40,7 @@ public class Player : MonoBehaviour
 
         // not need func (for test)
         // move vertical and horizontal
-        if (m_CanMove && !m_NotMove)
+        if (m_CanMove)
         {
             if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
             {
@@ -81,44 +79,27 @@ public class Player : MonoBehaviour
 
         // draw ray direction
         if (m_Vector.x == 1)
-        {
             m_DirVec = Vector3.right;
-        }
         else if (m_Vector.x == -1)
-        {
             m_DirVec = Vector3.left;
-        }
         else if (m_Vector.y == 1)
-        {
             m_DirVec = Vector3.up;
-        }
         else if (m_Vector.y == -1)
-        {
             m_DirVec = Vector3.down;
-        }
     }
 
     // action func
     public void Action()
     {
-        //m_CanMove = false;
+        m_CanMove = false;
         m_Anim.SetTrigger("Atk");
-    }
-
-    public void Move()
-    {
-        m_NotMove = false;
-    }
-
-    public void NotMove()
-    {
-        m_NotMove = true;
     }
 
     public void AttackRay()
     {
         // raycasy physics
-        rayHit = Physics2D.Raycast(transform.position, m_DirVec, 1.2f, LayerMask.GetMask("Enemy"));
+        Debug.DrawRay(this.transform.position, m_DirVec * 1.3f, new Color(1, 0, 0));
+        rayHit = Physics2D.Raycast(transform.position, m_DirVec, 1.3f, LayerMask.GetMask("Enemy"));
 
         if (rayHit)
         {
@@ -155,7 +136,7 @@ public class Player : MonoBehaviour
     public void LeftMove()
     {
         m_DirVec = Vector3.left;
-        if (m_CanMove && !m_NotMove)
+        if (m_CanMove)
         {
             m_Vector.Set(-1, 0, 0);
 
@@ -183,7 +164,7 @@ public class Player : MonoBehaviour
     public void TopMove()
     {
         m_DirVec = Vector3.up;
-        if (m_CanMove && !m_NotMove)
+        if (m_CanMove)
         {
             m_Vector.Set(0, 1, 0);
 
@@ -211,7 +192,7 @@ public class Player : MonoBehaviour
     public void DownMove()
     {
         m_DirVec = Vector3.down;
-        if (m_CanMove && !m_NotMove)
+        if (m_CanMove)
         {
             m_Vector.Set(0, -1, 0);
 
@@ -239,7 +220,7 @@ public class Player : MonoBehaviour
     public void RightMove()
     {
         m_DirVec = Vector3.right;
-        if (m_CanMove && !m_NotMove)
+        if (m_CanMove)
         {
             m_Vector.Set(1, 0, 0);
 

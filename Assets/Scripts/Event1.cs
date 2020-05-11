@@ -22,7 +22,7 @@ public class Event1 : MonoBehaviour
 
     void MoveEvent()
     {
-        EventManager.Instance.PlayerMoveRight(5.0f);
+        EventManager.Instance.PlayerMoveRight(100.0f);
     }
 
     void DiagEvent()

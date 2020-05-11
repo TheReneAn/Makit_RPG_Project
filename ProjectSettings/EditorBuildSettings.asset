@@ -6,14 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Field.unity
-    guid: 6222451494fa3994798b4abc85d64f72
+    path: Assets/Scenes/MainScreen.unity
+    guid: 733562c223fa3f842933f117e91c98ac
   - enabled: 1
     path: Assets/Scenes/Village.unity
     guid: ba686a2e7f2f8eb4e8b11b03f03dcf3d
   - enabled: 1
-    path: Assets/Scenes/MainScreen.unity
-    guid: 733562c223fa3f842933f117e91c98ac
+    path: Assets/Scenes/Field.unity
+    guid: 6222451494fa3994798b4abc85d64f72
   - enabled: 1
     path: Assets/Scenes/Loading.unity
     guid: 2f679a927cb40ed4ebbf9b2af95d426b
@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Opening.unity
     guid: ebfe66e5252e82141addd699d82444d3
   - enabled: 1
-    path: Assets/Scenes/Scenario.unity
-    guid: 5bfa7fddd91928c43bd9e941defc0aa9
+    path: Assets/Scenes/Die.unity
+    guid: 1c36ef4cb90381f4b8407ade74d94db6
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
