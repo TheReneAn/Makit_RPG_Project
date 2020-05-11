@@ -91,7 +91,13 @@ public class Inventory : MonoBehaviour
             theAudio.Play(beep_sound);
             OkorCanclePanel.SetActive(false);
         }
-    } 
+    }
+
+    private void OnEnable()
+    {
+        ClearInventorySlots();
+        MakeInventorySlots();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -103,8 +109,5 @@ public class Inventory : MonoBehaviour
     void Update()
     {
         Text_Coin.text = string.Format("{0:n0}", GameManager.Instance.g_Money);
-
-        ClearInventorySlots();
-        MakeInventorySlots();
     }
 }

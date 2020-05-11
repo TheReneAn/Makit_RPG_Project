@@ -2,11 +2,18 @@
 
 public class Physical_Item : MonoBehaviour
 {
+    [Header("Physical_Item Information")]
     [SerializeField] private PlayerInventory playerInventory;
     [SerializeField] private Item thisItem;
+    private Inventory thisInventory;
 
     [Header("Audio")]
     public string pickUpSound;
+
+    public void Start()
+    {
+        thisInventory = FindObjectOfType<Inventory>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -40,5 +47,9 @@ public class Physical_Item : MonoBehaviour
                 thisItem.itemCount += 1;
             }
         }
+        // Clear all of the inventory slots
+        thisInventory.ClearInventorySlots();
+        // Refill all slots with new numbers
+        thisInventory.MakeInventorySlots();
     }
 }
