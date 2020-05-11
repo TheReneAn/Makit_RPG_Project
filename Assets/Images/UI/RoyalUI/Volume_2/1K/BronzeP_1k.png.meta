@@ -67,12 +67,6 @@ TextureImporter:
     second: BronzeP_1k_21
   - first:
       213: 21300042
-    second: BronzeP_1k_12
-  - first:
-      213: 21300044
-    second: BronzeP_1k_13
-  - first:
-      213: 21300046
     second: BronzeP_1k_14
   externalObjects: {}
   serializedVersion: 11
@@ -615,7 +609,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: cf436407f9f66eb45b79c1237e9ad06f
-      internalID: 21300046
+      internalID: 21300042
       vertices: []
       indices: 
       edges: []

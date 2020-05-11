@@ -34,45 +34,39 @@ TextureImporter:
     second: BronzeP_2k_9
   - first:
       213: 21300020
-    second: BronzeP_2k_9
-  - first:
-      213: 21300022
     second: BronzeP_2k_10
   - first:
-      213: 21300024
+      213: 21300022
     second: BronzeP_2k_11
   - first:
-      213: 21300026
+      213: 21300024
     second: BronzeP_2k_12
   - first:
-      213: 21300028
+      213: 21300026
     second: BronzeP_2k_13
   - first:
-      213: 21300030
+      213: 21300028
     second: BronzeP_2k_16
   - first:
-      213: 21300032
-    second: BronzeP_2k_19
-  - first:
-      213: 21300034
+      213: 21300030
     second: BronzeP_2k_14
   - first:
-      213: 21300036
+      213: 21300032
     second: BronzeP_2k_17
   - first:
-      213: 21300038
+      213: 21300034
     second: BronzeP_2k_18
   - first:
-      213: 21300040
+      213: 21300036
     second: BronzeP_2k_19
   - first:
-      213: 21300042
+      213: 21300038
     second: BronzeP_2k_15
   - first:
-      213: 21300044
+      213: 21300040
     second: BronzeP_2k_20
   - first:
-      213: 21300046
+      213: 21300042
     second: BronzeP_2k_21
   externalObjects: {}
   serializedVersion: 11
@@ -384,7 +378,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: f2d85bff7a27e834ea3c0b4be74bec52
-      internalID: 21300022
+      internalID: 21300020
       vertices: []
       indices: 
       edges: []
@@ -405,7 +399,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 679573daa6f9eb147b6a13b85b7a0b40
-      internalID: 21300024
+      internalID: 21300022
       vertices: []
       indices: 
       edges: []
@@ -426,7 +420,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 86a3a6deefe44b44083cbfffa9657814
-      internalID: 21300026
+      internalID: 21300024
       vertices: []
       indices: 
       edges: []
@@ -447,7 +441,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: c08df5580a3f0474b81bcbba64f19e24
-      internalID: 21300028
+      internalID: 21300026
       vertices: []
       indices: 
       edges: []
@@ -468,7 +462,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 85525560da47080479803805effb6b4d
-      internalID: 21300030
+      internalID: 21300028
       vertices: []
       indices: 
       edges: []
@@ -489,7 +483,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: a601330934437134387881e2699e9ef7
-      internalID: 21300034
+      internalID: 21300030
       vertices: []
       indices: 
       edges: []
@@ -510,7 +504,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: d425a1dcbf258494f96f652d673cc963
-      internalID: 21300036
+      internalID: 21300032
       vertices: []
       indices: 
       edges: []
@@ -531,7 +525,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: cc6524f009b788547bc484cdbf841b3b
-      internalID: 21300038
+      internalID: 21300034
       vertices: []
       indices: 
       edges: []
@@ -552,7 +546,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: ec69f179e3ee2f747adf8d72ce49ba41
-      internalID: 21300032
+      internalID: 21300036
       vertices: []
       indices: 
       edges: []
@@ -573,7 +567,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 82fb6c6ef1e5be542b41ca55cb3282eb
-      internalID: 21300042
+      internalID: 21300038
       vertices: []
       indices: 
       edges: []
@@ -594,7 +588,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 44d8f88b3ce4cb84bac4acfe12609e99
-      internalID: 21300044
+      internalID: 21300040
       vertices: []
       indices: 
       edges: []
@@ -615,7 +609,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 3027d959cb97ea948ad6dee8f86ae05b
-      internalID: 21300046
+      internalID: 21300042
       vertices: []
       indices: 
       edges: []
