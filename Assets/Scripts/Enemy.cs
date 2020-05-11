@@ -25,7 +25,10 @@ public class Enemy : MonoBehaviour
     public GameObject m_FindImage;       // enemy emphasize image (aggro)
     public Animator m_Anim;
     public GameObject m_HPsprite;
+    public GameObject m_HitEffect;
+    public int m_SpeciesNum;
 
+    private ENEMYSPECIES m_Species;
     private GameObject m_Player;         // player object
     private Vector2 m_PlayerPos;         // player position
     private int m_RandomInt;             // random moving
@@ -33,6 +36,7 @@ public class Enemy : MonoBehaviour
     private ENEMYSTATE m_PrevState;      // enemy previous state;
     private RaycastHit2D rayHit;
     private Vector3 m_DirVec;
+    private Vector3 m_Home;
 
     private float m_TimeCount;           // time count (behave)
     private bool m_CanMove = true;       // can move bool
@@ -49,6 +53,14 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        // set species
+        if (m_SpeciesNum == 0)
+            m_Species = ENEMYSPECIES.GOBLIN;
+        if (m_SpeciesNum == 1)
+            m_Species = ENEMYSPECIES.SLIME;
+        if (m_SpeciesNum == 2)
+            m_Species = ENEMYSPECIES.WOLF;
+
         // compare before action
         m_PrevState = m_CurState;
         m_Anim.SetBool("IsChange", false); // for animation one shot
@@ -77,7 +89,14 @@ public class Enemy : MonoBehaviour
                 {
                     m_FindImage.SetActive(false); // aggro enphasize image - off
                     m_HPsprite.SetActive(false);  // hp guage off
-                    RandomMove();   // random move
+                    if (m_Species == ENEMYSPECIES.GOBLIN)
+                        RandomMove();   // random move
+                    else if (m_Species == ENEMYSPECIES.WOLF)
+                    {
+                        m_CurState = ENEMYSTATE.IDLE;
+                        m_Anim.SetBool("IsChange", true);
+                        ChangeAnimation("Idle", true);
+                    }
                 }
                 m_TimeCount = 0;    // timer init
             }
@@ -98,6 +117,12 @@ public class Enemy : MonoBehaviour
             IsDie();
             Destroy(gameObject, 3);
         }
+    }
+
+    // EXP sequence
+    void TakeEXP()
+    {
+        GameManager.Instance.g_PlayerEXP += m_EXP;
     }
 
     // animation setting (polymorph)
@@ -186,6 +211,7 @@ public class Enemy : MonoBehaviour
         m_EnemyCurHP -= GameManager.Instance.g_PlayerAtk;
         m_HPsprite.transform.localScale = new Vector3(((float)m_EnemyCurHP / (float)m_EnemyHP), 
             m_HPsprite.transform.localScale.y, m_HPsprite.transform.localScale.z);
+        Instantiate(m_HitEffect, gameObject.transform.position, Quaternion.identity);
     }
 
     // die sequence
@@ -196,6 +222,12 @@ public class Enemy : MonoBehaviour
         m_CurState = ENEMYSTATE.DIE;
         ChangeAnimation("IsDie", true);
         m_CanMove = false;
+
+        // player get EXP
+        if (m_Anim.GetBool("IsChange"))
+        {
+            TakeEXP();
+        }
     }
 
     // check aggro range
@@ -300,14 +332,17 @@ public class Enemy : MonoBehaviour
     public void AttackRay()
     {
         // raycasy physics
-        rayHit = Physics2D.Raycast(transform.position, m_DirVec, 1.2f, LayerMask.GetMask("Player"));
+        if (m_Species == ENEMYSPECIES.GOBLIN)
+            rayHit = Physics2D.Raycast(transform.position, m_DirVec, 1.2f, LayerMask.GetMask("Player"));
+        else if (m_Species == ENEMYSPECIES.WOLF)
+            rayHit = Physics2D.Raycast(transform.position, m_DirVec, 1.5f, LayerMask.GetMask("Player"));
 
         if (rayHit)
         {
-            // enemy hit knock back
-            rayHit.collider.gameObject.transform.position =
-            new Vector2(rayHit.collider.gameObject.transform.position.x + m_DirVec.x / 2,
-            rayHit.collider.gameObject.transform.position.y + m_DirVec.y / 2);
+             // enemy hit knock back
+             rayHit.collider.gameObject.transform.position =
+             new Vector2(rayHit.collider.gameObject.transform.position.x + m_DirVec.x / 2,
+             rayHit.collider.gameObject.transform.position.y + m_DirVec.y / 2);
         }
 
         // player damaged

@@ -73,6 +73,8 @@
     <Compile Include="Assets\Images\Map\Field\2D Fantasy Forest Tileset\Scripts\Tile.cs" />
     <Compile Include="Assets\Images\Map\Field\2D Fantasy Forest Tileset\Scripts\TimedAnimations.cs" />
     <Compile Include="Assets\Images\Map\Field\2D Fantasy Forest Tileset\Scripts\Trigger.cs" />
+    <Compile Include="Assets\Items\Item Reaction\HealthReaction.cs" />
+    <Compile Include="Assets\Items\Item Reaction\MPReaction.cs" />
     <Compile Include="Assets\Manager\AudioManager.cs" />
     <Compile Include="Assets\Manager\BGMManager.cs" />
     <Compile Include="Assets\Manager\DialogueManager.cs" />
@@ -81,11 +83,15 @@
     <Compile Include="Assets\Manager\GameManager.cs" />
     <Compile Include="Assets\Manager\NPCManager.cs" />
     <Compile Include="Assets\Manager\QuestManager.cs" />
+    <Compile Include="Assets\Scripts\ChangeSceneButton.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Event1.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\Inventory\InventorySlot.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Physical_Item.cs" />
     <Compile Include="Assets\Scripts\Inventory\PlayerInventory.cs" />
+    <Compile Include="Assets\Scripts\InventorySaver.cs" />
     <Compile Include="Assets\Scripts\Item\Item.cs" />
     <Compile Include="Assets\Scripts\OkorCancel.cs" />
     <Compile Include="Assets\Scripts\ParticleSystemOrder.cs" />
@@ -97,6 +103,7 @@
     <Compile Include="Assets\Scripts\UI\Dialogue.cs" />
     <Compile Include="Assets\Scripts\UI\Field_UI.cs" />
     <Compile Include="Assets\Scripts\UI\PlayerGuageUI.cs" />
+    <Compile Include="Assets\Scripts\UI\Setting_UI.cs" />
     <Compile Include="Assets\Scripts\UI\Vilage_UI.cs" />
     <None Include="Assets\Images\UI\RoyalUI\readme.txt" />
     <Reference Include="UnityEngine">

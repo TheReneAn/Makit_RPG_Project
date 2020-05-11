@@ -51,6 +51,9 @@ public class GameManager : MonoBehaviour
     public int g_PlayerEXP = 0;             // player exprience
     public int g_Money = 0;                 // player money
     public int g_CurrentSceneNum = 0;       // current scene number
+    public bool g_CheckSceneChange;       // current scene number
+    public int[] maxLevelUpEXP =           // level up exp
+    {0, 100, 500, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000};
     public Vector2 g_PlayerPosition;        // player position
 
 

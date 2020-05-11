@@ -25,7 +25,15 @@ public class Item : ScriptableObject
     public UnityEvent thisEvent;
     public void Use()
     {
-        Debug.Log("Using Item");
         thisEvent.Invoke();
+    }
+
+    public void DecreseAmount(int amountToDecrease)
+    {
+        itemCount -= amountToDecrease;
+        if (itemCount < 0)
+        {
+            itemCount = 0;
+        }
     }
 }

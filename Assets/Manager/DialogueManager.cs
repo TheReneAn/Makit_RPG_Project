@@ -42,6 +42,7 @@ public class DialogueManager : MonoBehaviour
     public SpriteRenderer m_SpriteRenderer;             // portrait sprite
     public SpriteRenderer m_DialogueWindowRenderer;     // dialogue windows
     public GameObject m_DiagMgrObj;
+    public GameObject m_ControllerObj;
 
     private Player m_Player;                            // player
     private List<string> m_ListSentence;                // context list
@@ -70,6 +71,7 @@ public class DialogueManager : MonoBehaviour
     public void ShowDialogue(Dialogue diag)
     {
         m_DiagMgrObj.SetActive(true);
+        m_ControllerObj.SetActive(false);
         // check talking on
         m_IsTalking = true;
 
@@ -99,6 +101,7 @@ public class DialogueManager : MonoBehaviour
 
         m_IsTalking = false;
         m_DiagMgrObj.SetActive(false);
+        m_ControllerObj.SetActive(true);
         // player controll on
         m_Player.CanControl();
     }

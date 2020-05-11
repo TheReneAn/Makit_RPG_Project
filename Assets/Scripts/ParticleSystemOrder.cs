@@ -7,7 +7,7 @@ public class ParticleSystemOrder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.GetComponent<Renderer>().sortingOrder = 3;
+        gameObject.GetComponent<Renderer>().sortingOrder = 100;
     }
 
     // Update is called once per frame

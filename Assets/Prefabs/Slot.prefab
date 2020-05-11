@@ -316,3 +316,5 @@ MonoBehaviour:
   itemCount: {fileID: 2855131002824740008}
   thisItem: {fileID: 0}
   thisInventory: {fileID: 0}
+  OkorCanclePanel: {fileID: 8306792499825453928, guid: cd3c2b2263e68c54390084e7c02a01f8,
+    type: 3}

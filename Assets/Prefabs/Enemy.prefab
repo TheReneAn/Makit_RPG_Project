@@ -201,6 +201,8 @@ MonoBehaviour:
   m_FindImage: {fileID: 2101513142451705752}
   m_Anim: {fileID: 2101513142808791175}
   m_HPsprite: {fileID: 2658060473300345170}
+  m_HitEffect: {fileID: 100000, guid: bc98890f6028f444eaa7789bde5e2eeb, type: 3}
+  m_SpeciesNum: 0
 --- !u!61 &2101513142808791168
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class OkorCancel : MonoBehaviour
 {
+    [Header("Inventory Information")]
     private Inventory thisInventory;
 
+    [Header("Audio")]
     private AudioManager theAudio;
-    public string enter_sound;
     public string Okay_sound;
     public string cancel_sound;
 
@@ -22,7 +24,6 @@ public class OkorCancel : MonoBehaviour
         thisInventory = FindObjectOfType<Inventory>();
 
         theAudio = FindObjectOfType<AudioManager>();
-        theAudio.Play(enter_sound);
     }
 
     // Update is called once per frame
@@ -34,6 +35,16 @@ public class OkorCancel : MonoBehaviour
     public void Click_Ok()
     {
         theAudio.Play(Okay_sound);
+
+        if (thisInventory.currentItem)
+        {
+            thisInventory.currentItem.Use();
+            // Clear all of the inventory slots
+            thisInventory.ClearInventorySlots();
+            // Refill all slots with new numbers
+            thisInventory.MakeInventorySlots();
+        }
+
         result = true;
         thisInventory.OkorCanclePanel.SetActive(false);
     }

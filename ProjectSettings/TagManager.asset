@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -43,4 +44,7 @@ TagManager:
     locked: 0
   - name: Enemy
     uniqueID: 4080508381
+    locked: 0
+  - name: breakable
+    uniqueID: 1635367585
     locked: 0

@@ -44,10 +44,12 @@ public class EventManager : MonoBehaviour
     private bool m_PlayerMoveUp;        // is player move up?
     private bool m_PlayerMoveDown;      // is player move down?
     private bool m_Checker;             // check the privous player position bool
+    public bool g_IsEventEnd;             // check moving
     void Start()
     {
         m_player = FindObjectOfType<Player>();
         m_Checker = true;
+        g_IsEventEnd = false;
     }
 
     void Update()
@@ -89,6 +91,7 @@ public class EventManager : MonoBehaviour
         if (m_Dist >= m_DistX)
         {
             m_PlayerMoveRight = false;
+            g_IsEventEnd = true;
             m_Checker = true;
             m_player.CanControl();
         }
@@ -115,6 +118,7 @@ public class EventManager : MonoBehaviour
         if (m_Dist >= m_DistX)
         {
             m_PlayerMoveLeft = false;
+            g_IsEventEnd = true;
             m_Checker = true;
             m_player.CanControl();
         }
@@ -141,6 +145,7 @@ public class EventManager : MonoBehaviour
         if (m_Dist >= m_DistY)
         {
             m_PlayerMoveUp = false;
+            g_IsEventEnd = true;
             m_Checker = true;
             m_player.CanControl();
         }
@@ -167,6 +172,7 @@ public class EventManager : MonoBehaviour
         if (m_Dist >= m_DistY)
         {
             m_PlayerMoveDown = false;
+            g_IsEventEnd = true;
             m_Checker = true;
             m_player.CanControl();
         }

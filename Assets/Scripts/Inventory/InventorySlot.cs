@@ -22,8 +22,16 @@ public class InventorySlot : MonoBehaviour
 
         if (thisItem)
         {
-            itemIcon.sprite = thisItem.itemIcon;
-            itemCount.text = "" + thisItem.itemCount;
+            if(Item.ItemType.Equip == newItem.itemType)
+            {
+                itemIcon.sprite = thisItem.itemIcon;
+                itemCount.text = "";
+            }
+            else
+            {
+                itemIcon.sprite = thisItem.itemIcon;
+                itemCount.text = "" + thisItem.itemCount;
+            }
         }
     }
 
@@ -35,38 +43,4 @@ public class InventorySlot : MonoBehaviour
             thisInventory.ClickItemSlot(Useable, thisItem);
         }
     }
-
-    //public void Additem(Item _item)
-    //{
-    //    thisItem = _item;
-
-    //    icon.sprite = _item.itemIcon;
-    //    if (Item.ItemType.Use == _item.itemType)
-    //    {
-    //        if (_item.itemCount > 0)
-    //        {
-    //            itemCount_Text.text = _item.itemCount.ToString();
-    //        }
-    //        else
-    //        {
-    //            itemCount_Text.text = "";
-    //        }
-    //    }
-    //}
-
-    //public void RemoveItem()
-    //{
-    //    icon.sprite = null;
-    //    itemCount_Text.text = "";
-    //}
-
-    //public string GetitemType()
-    //{
-    //    return thisItemType = thisItem.itemType.ToString();
-    //}
-
-    //public void ClickedOn()
-    //{
-    //    Inventory.instance.SelectItem(thisItem);
-    //}
 }

@@ -12,17 +12,21 @@ public class Player : MonoBehaviour
     public GameObject m_SkillDamage;        // skill damage collider
     public GameObject m_LackOfManaText;     // not enough mana text
     public GameObject m_SkillParticle;      // skill effect
+    public GameObject m_LevelUpParticle;    // LevelUp effect
     public GameObject m_ControlPad;         // control pad 
     public GameObject m_Skill1Obj;          // skill 1 Obj
-    public GameObject m_Skill2Obj;          // skill 1 Obj
-    public GameObject m_UltimateObj;        // skill 1 Obj  
+    public GameObject m_Skill2Obj;          // skill 2 Obj
+    public GameObject m_UltimateObj;        // Ulti Obj  
     public bool m_IsPlayerField;            // where is player? 0 - Village, 1 - Field
+    public bool m_LevelUp;
     public bool m_CanMove;                  // can move or not
     public bool m_CanAtk;                   // can attack or not
-    public RaycastHit2D rayHit;             // attack ray
+
+    private RaycastHit2D rayHit;             // attack ray
     private Vector3 m_DirVec;               // attack ray direction
     private float m_CurTime;                // manaregen current time
     private Enemy enemy;                    // enemy
+
 
     void Start()
     {
@@ -99,25 +103,36 @@ public class Player : MonoBehaviour
             Invoke("NotEnoughManaDestroy", 1.0f);
         }
 
-        Debug.Log(GameManager.Instance.g_PlayerLevel);
+        // player level sequence
+        if(GameManager.Instance.g_PlayerEXP >= GameManager.Instance.maxLevelUpEXP[GameManager.Instance.g_PlayerLevel])
+        {
+            GameManager.Instance.g_PlayerLevel++;
+            Instantiate(m_LevelUpParticle, gameObject.transform.position, Quaternion.identity);
+            m_LevelUp = true;
+            GameManager.Instance.g_PlayerAtk += 3;
+            GameManager.Instance.g_PlayerDex += 3;
+            GameManager.Instance.g_PlayerCon += 3;
+            GameManager.Instance.g_PlayerCurrentHP = GameManager.Instance.g_PlayerHP;
+        }
 
-        // test code for event manager
-        if(Input.GetKeyDown(KeyCode.D))
-        {
-            EventManager.Instance.PlayerMoveRight(5.0f);
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            EventManager.Instance.PlayerMoveLeft(5.0f);
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            EventManager.Instance.PlayerMoveUp(5.0f);
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            EventManager.Instance.PlayerMoveDown(5.0f);
-        }
+        //// test code for event manager
+        //if (Input.GetKeyDown(KeyCode.D))
+        //{
+        //    EventManager.Instance.PlayerMoveRight(5.0f);
+        //}
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    EventManager.Instance.PlayerMoveLeft(5.0f);
+        //}
+        //if (Input.GetKeyDown(KeyCode.W))
+        //{
+        //    EventManager.Instance.PlayerMoveUp(5.0f);
+        //}
+        //if (Input.GetKeyDown(KeyCode.S))
+        //{
+        //    EventManager.Instance.PlayerMoveDown(5.0f);
+        //}
+
         // ******** not need func (for test - When it open, it should be delete)
         // move vertical and horizontal
         //if (m_CanMove)
@@ -174,14 +189,6 @@ public class Player : MonoBehaviour
 
             // enemy damage
             rayHit.collider.gameObject.GetComponent<Enemy>().IsHit();
-            if(rayHit.collider.gameObject.GetComponent<Enemy>().m_EnemyCurHP <= 0)
-            {
-                GameManager.Instance.g_PlayerEXP += rayHit.collider.gameObject.GetComponent<Enemy>().m_EXP;
-                if(GameManager.Instance.g_PlayerEXP > 100)
-                {
-                    GameManager.Instance.g_PlayerLevel++;
-                }
-            }
         }
     }
 
