@@ -63,16 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Images\Map\Field\2D Fantasy Forest Tileset\Scripts\CameraFollow.cs" />
-    <Compile Include="Assets\Images\Map\Field\2D Fantasy Forest Tileset\Scripts\CollectableBounce.cs" />
-    <Compile Include="Assets\Images\Map\Field\2D Fantasy Forest Tileset\Scripts\Door.cs" />
-    <Compile Include="Assets\Images\Map\Field\2D Fantasy Forest Tileset\Scripts\FadeScript.cs" />
-    <Compile Include="Assets\Images\Map\Field\2D Fantasy Forest Tileset\Scripts\MenuButtons.cs" />
-    <Compile Include="Assets\Images\Map\Field\2D Fantasy Forest Tileset\Scripts\PlayerMovement.cs" />
-    <Compile Include="Assets\Images\Map\Field\2D Fantasy Forest Tileset\Scripts\SpikeTrap.cs" />
-    <Compile Include="Assets\Images\Map\Field\2D Fantasy Forest Tileset\Scripts\Tile.cs" />
-    <Compile Include="Assets\Images\Map\Field\2D Fantasy Forest Tileset\Scripts\TimedAnimations.cs" />
-    <Compile Include="Assets\Images\Map\Field\2D Fantasy Forest Tileset\Scripts\Trigger.cs" />
     <Compile Include="Assets\Items\Item Reaction\HealthReaction.cs" />
     <Compile Include="Assets\Items\Item Reaction\MPReaction.cs" />
     <Compile Include="Assets\Manager\AudioManager.cs" />
@@ -85,17 +75,21 @@
     <Compile Include="Assets\Manager\NPCManager.cs" />
     <Compile Include="Assets\Manager\QuestManager.cs" />
     <Compile Include="Assets\Scripts\ChangeSceneButton.cs" />
+    <Compile Include="Assets\Scripts\Dialogue.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
+    <Compile Include="Assets\Scripts\EnemyNormalDamage.cs" />
     <Compile Include="Assets\Scripts\Event1.cs" />
-    <Compile Include="Assets\Scripts\Interactable.cs" />
     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
+    <Compile Include="Assets\Scripts\Inventory\InventorySaver.cs" />
     <Compile Include="Assets\Scripts\Inventory\InventorySlot.cs" />
     <Compile Include="Assets\Scripts\Inventory\Physical_Item.cs" />
     <Compile Include="Assets\Scripts\Inventory\PlayerInventory.cs" />
-    <Compile Include="Assets\Scripts\InventorySaver.cs" />
     <Compile Include="Assets\Scripts\Item\Item.cs" />
     <Compile Include="Assets\Scripts\MoveMap.cs" />
     <Compile Include="Assets\Scripts\MoveScene.cs" />
+    <Compile Include="Assets\Scripts\NPC\StoreNPC_Phsical.cs" />
+    <Compile Include="Assets\Scripts\NPC\StoreNPC_SeletAction.cs" />
+    <Compile Include="Assets\Scripts\NormalDamage.cs" />
     <Compile Include="Assets\Scripts\OkorCancel.cs" />
     <Compile Include="Assets\Scripts\ParticleSystemOrder.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
@@ -103,7 +97,6 @@
     <Compile Include="Assets\Scripts\SkillDamage.cs" />
     <Compile Include="Assets\Scripts\UI\DPadController.cs" />
     <Compile Include="Assets\Scripts\UI\DiagTest.cs" />
-    <Compile Include="Assets\Scripts\UI\Dialogue.cs" />
     <Compile Include="Assets\Scripts\UI\Field_UI.cs" />
     <Compile Include="Assets\Scripts\UI\GameOverUI.cs" />
     <Compile Include="Assets\Scripts\UI\GameStartUI.cs" />
@@ -139,13 +132,17 @@
     <None Include="Assets\Tiled2Unity\Shaders\shaDiffuseDepth.shader" />
     <None Include="Assets\Tiled2Unity\Meshes\_ReadMe.txt" />
     <None Include="Assets\Tiled2Unity\Shaders\shaDepthColorKey-Instanced.shader" />
+    <None Include="Assets\Tiled2Unity\Imported\genaral store.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Textures\_ReadMe.txt" />
+    <None Include="Assets\Tiled2Unity\Imported\academy hallway.tiled2unity.xml" />
     <None Include="Assets\Images\UI\RoyalUI\readme.txt" />
     <None Include="Assets\Tiled2Unity\Shaders\shaDefault.shader" />
     <None Include="Assets\Tiled2Unity\Imported\_ReadMe.txt" />
+    <None Include="Assets\Tiled2Unity\Imported\armor store.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Imported\town.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Shaders\shaColorKey-Instanced.shader" />
     <None Include="Assets\Tiled2Unity\Shaders\shaDepth-Instanced.shader" />
+    <None Include="Assets\Tiled2Unity\Imported\Library.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Prefabs\_ReadMe.txt" />
     <None Include="Assets\Tiled2Unity\Shaders\shaColorKey.shader" />
     <Reference Include="UnityEngine">

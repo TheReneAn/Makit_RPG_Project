@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     public float m_Aggro;                // enemy aggro range
     public float m_AtkRange;             // enemy attack range
     public GameObject m_FindImage;       // enemy emphasize image (aggro)
+    public GameObject m_NormalDamageCol;        // normal damage collider
     public Animator m_Anim;
     public GameObject m_HPsprite;
     public GameObject m_HitEffect;
@@ -74,16 +75,18 @@ public class Enemy : MonoBehaviour
 
             if (m_TimeCount > m_EnemyBehaveCoolTime) // behave cooltime
             {
-                if (NearPlayer()) // player aggro check
+                if (NearPlayer() && !AtkPlayer()) // player aggro check
+                {
+                    m_CanMove = true;
+                    m_HPsprite.SetActive(true);  // hp guage on
+                    m_FindImage.SetActive(true); // aggro enphasize image - on
+                    ChasePlayer(); // chase player
+                }
+                else if (AtkPlayer())
                 {
                     m_HPsprite.SetActive(true);  // hp guage on
                     m_FindImage.SetActive(true); // aggro enphasize image - on
-
-                    // attack range check
-                    if (AtkPlayer())
-                        Attack(); // attack player
-                    else
-                        ChasePlayer(); // chase player
+                    Attack(); // attack player
                 }
                 else
                 {
@@ -100,6 +103,7 @@ public class Enemy : MonoBehaviour
                 }
                 m_TimeCount = 0;    // timer init
             }
+
             EnemyMovingProcess();   // enemy actual movement function
 
             //enemy idle check
@@ -245,13 +249,14 @@ public class Enemy : MonoBehaviour
     // check attack range
     bool AtkPlayer()
     {
-
-        if (Mathf.Abs(m_PlayerPos.x - this.transform.position.x) < m_AtkRange &&
-            Mathf.Abs(m_PlayerPos.y - this.transform.position.y) < m_AtkRange)
+        if (GameManager.Instance.g_PlayerCurrentHP > 0)
         {
-            return true;
+            if (Mathf.Abs(m_PlayerPos.x - this.transform.position.x) < m_AtkRange &&
+                Mathf.Abs(m_PlayerPos.y - this.transform.position.y) < m_AtkRange)
+            {
+                return true;
+            }
         }
-
         return false;
     }
 
@@ -328,25 +333,15 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-
-    public void AttackRay()
+    public void AttackStart()
     {
-        // raycasy physics
-        if (m_Species == ENEMYSPECIES.GOBLIN)
-            rayHit = Physics2D.Raycast(transform.position, m_DirVec, 1.2f, LayerMask.GetMask("Player"));
-        else if (m_Species == ENEMYSPECIES.WOLF)
-            rayHit = Physics2D.Raycast(transform.position, m_DirVec, 1.5f, LayerMask.GetMask("Player"));
+        m_NormalDamageCol.SetActive(true);
+        m_NormalDamageCol.transform.position = transform.position + m_DirVec;
+    }
 
-        if (rayHit)
-        {
-             // enemy hit knock back
-             rayHit.collider.gameObject.transform.position =
-             new Vector2(rayHit.collider.gameObject.transform.position.x + m_DirVec.x / 2,
-             rayHit.collider.gameObject.transform.position.y + m_DirVec.y / 2);
-        }
-
-        // player damaged
-        GameManager.Instance.g_PlayerCurrentHP -= m_Atk;
+    public void AttackEnd()
+    {
+        m_NormalDamageCol.SetActive(false);
     }
 
     // random move

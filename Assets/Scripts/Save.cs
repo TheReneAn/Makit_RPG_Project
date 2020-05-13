@@ -57,8 +57,6 @@ public class Save : MonoBehaviour
 
         bf.Serialize(file, m_Data);
         file.Close();
-
-        Debug.Log(Application.dataPath + " saved");
     }
     public void LoadGame()
     {

@@ -47,6 +47,7 @@ public class Physical_Item : MonoBehaviour
                 thisItem.itemCount += 1;
             }
         }
+
         // Clear all of the inventory slots
         thisInventory.ClearInventorySlots();
         // Refill all slots with new numbers

@@ -1,0 +1,24 @@
+﻿# Tiled2Unity generated file. Do not modify by hand.
+# Wavefront file for 'Library_mesh_0008.obj'
+
+# Vertices (Count = 4)
+v -64 -640 0
+v -96 -640 0
+v -96 -608 0
+v -64 -608 0
+
+# Texture cooridinates (Count = 4)
+vt 0.06237817 0.7192982
+vt 0.09356725 0.7192982
+vt 0.09356725 0.7504873
+vt 0.06237817 0.7504873
+
+# Normal
+vn 0 0 -1
+
+# Mesh description
+g Library_mesh_0008
+
+# Faces
+f 1/1/1 2/2/1 3/3/1 4/4/1
+

@@ -22,7 +22,8 @@ public class InventorySlot : MonoBehaviour
 
         if (thisItem)
         {
-            if(Item.ItemType.Equip == newItem.itemType)
+            // If a player can equip the new item, there is no count number
+            if(thisItem.itemType == Item.ItemType.Equip)
             {
                 itemIcon.sprite = thisItem.itemIcon;
                 itemCount.text = "";

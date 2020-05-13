@@ -41,7 +41,8 @@ public class GameManager : MonoBehaviour
     public int g_PlayerDex = 5;             // player status dex
     public int g_PlayerCon = 5;             // player status con
     public int g_PlayerAtk = 0;             // player total attak 
-    public int g_PlayerDef = 0;             // player total def
+    public int g_PlayerDef = 0;             // player total defence
+    public int g_PlayerCrt = 0;             // player total critical
     public int g_PlayerAvd = 0;             // player total avoid
     public int g_PlayerHP = 100;            // player max hp
     public int g_PlayerMP = 100;            // player max np

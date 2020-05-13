@@ -338,7 +338,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7564935a6a4e3904b9faa2897ed37d37, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2a910dcecaaa8ec4ea837f2a4afa2094, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -390,6 +390,7 @@ MonoBehaviour:
   g_PlayerCon: 5
   g_PlayerAtk: 0
   g_PlayerDef: 0
+  g_PlayerCrt: 0
   g_PlayerAvd: 0
   g_PlayerHP: 100
   g_PlayerMP: 100

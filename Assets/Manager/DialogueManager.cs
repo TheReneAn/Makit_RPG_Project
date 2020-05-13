@@ -51,7 +51,7 @@ public class DialogueManager : MonoBehaviour
 
     private int m_Count;                                // cound character (alphabet)
 
-    private bool m_IsTalking = false;                   // is talking? check bool
+    public bool m_IsTalking = false;                   // is talking? check bool
 
     // Teddy part function
     void Start()
