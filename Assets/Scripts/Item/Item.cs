@@ -22,6 +22,8 @@ public class Item : ScriptableObject
         Coin
     }
 
+    public int itemPrice;
+
     public UnityEvent thisEvent;
     public void Use()
     {

@@ -13,8 +13,6 @@ public class InventorySlot : MonoBehaviour
     public Item thisItem;
     public Inventory thisInventory;
 
-    private bool Useable = false;
-
     public void Setup (Item newItem, Inventory newInventory)
     {
         thisItem = newItem;
@@ -40,8 +38,7 @@ public class InventorySlot : MonoBehaviour
     {
         if (thisItem)
         {
-            Useable = true;
-            thisInventory.ClickItemSlot(Useable, thisItem);
+            thisInventory.ClickItemSlot(thisItem);
         }
     }
 }

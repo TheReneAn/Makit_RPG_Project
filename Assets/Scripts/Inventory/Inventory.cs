@@ -75,7 +75,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void ClickItemSlot (bool _clickedSlot, Item newItem)
+    public void ClickItemSlot (Item newItem)
     {
         currentItem = newItem;
 
@@ -83,7 +83,7 @@ public class Inventory : MonoBehaviour
             (currentItem.itemType.ToString() == "Equip"))
 
         {
-            OkorCanclePanel.SetActive(_clickedSlot);
+            OkorCanclePanel.SetActive(true);
             theAudio.Play(enter_sound);
         }
         else
