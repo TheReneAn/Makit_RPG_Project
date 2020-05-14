@@ -11,35 +11,52 @@ public class Shop_Slot : MonoBehaviour
     public Text itemPrice;
     public Text itemOwnCount;
     public Text show_itemqty;
-
     private int int_itemqty = 0;
 
-    [Header("Variables from the item")]
+    [Header("Variables from the others")]
     public Item thisItem;
 
+    public void Sell_Setup(Item newItem)
+    {
+        thisItem = newItem;
+
+        if (thisItem)
+        {
+            if (thisItem.itemType == Item.ItemType.Use)
+            {
+                itemIcon.sprite = thisItem.itemIcon;
+                itemName.text = thisItem.itemName;
+                itemPrice.text = thisItem.itemPrice.ToString();
+                itemOwnCount.text = "" + thisItem.itemCount;
+            }
+
+            if (thisItem.itemType == Item.ItemType.Equip)
+            {
+                itemIcon.sprite = thisItem.itemIcon;
+                itemName.text = thisItem.itemName;
+                itemPrice.text = thisItem.itemPrice.ToString();
+                itemOwnCount.text = "" + 1;
+            }
+        }
+    }
 
     public void Btn_Qty_up()
     {
-        if (Input.GetMouseButton(0))
+        int_itemqty += 1;
+
+        if (int_itemqty >= 999)
         {
-            int_itemqty += 1;
-           
-            if (int_itemqty >= 999)
-            {
-                int_itemqty = 999;
-            }
+            int_itemqty = 999;
         }
     }
 
     public void Btn_Qty_down()
     {
-        if (Input.GetMouseButton(0))
+        int_itemqty -= 1;
+
+        if (int_itemqty <= 0)
         {
-            int_itemqty -= 1;
-            if(int_itemqty <= 0)
-            {
-                int_itemqty = 0;
-            }
+            int_itemqty = 0;
         }
     }
 
@@ -48,12 +65,11 @@ public class Shop_Slot : MonoBehaviour
     {
         // Setting item qty
         int_itemqty = 0;
-        show_itemqty.text = int_itemqty.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        show_itemqty.text = int_itemqty.ToString();
     }
 }

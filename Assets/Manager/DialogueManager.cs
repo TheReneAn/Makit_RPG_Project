@@ -45,6 +45,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject m_ControllerObj;
 
     private Player m_Player;                            // player
+    private DPadController m_DCon;
     private List<string> m_ListSentence;                // context list
     private List<string> m_ListNames;                   // name list
     private List<Sprite> m_ListSprites;                 // portrait list
@@ -65,6 +66,7 @@ public class DialogueManager : MonoBehaviour
         m_ListSprites = new List<Sprite>();
         m_DiagMgrObj.SetActive(false);
         m_Player = FindObjectOfType<Player>();
+        m_DCon = FindObjectOfType<DPadController>();
     }
 
     // dialogue open
@@ -72,6 +74,8 @@ public class DialogueManager : MonoBehaviour
     {
         m_DiagMgrObj.SetActive(true);
         m_ControllerObj.SetActive(false);
+        m_Player.Idle();
+        m_DCon.Idle();
         // check talking on
         m_IsTalking = true;
 
@@ -104,6 +108,7 @@ public class DialogueManager : MonoBehaviour
         m_ControllerObj.SetActive(true);
         // player controll on
         m_Player.CanControl();
+        m_Player.Idle();
     }
 
     // typing alphabet

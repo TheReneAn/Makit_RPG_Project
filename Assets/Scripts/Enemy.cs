@@ -336,7 +336,7 @@ public class Enemy : MonoBehaviour
     public void AttackStart()
     {
         m_NormalDamageCol.SetActive(true);
-        m_NormalDamageCol.transform.position = transform.position + m_DirVec;
+        m_NormalDamageCol.transform.position = transform.position + m_DirVec * 20;
     }
 
     public void AttackEnd()

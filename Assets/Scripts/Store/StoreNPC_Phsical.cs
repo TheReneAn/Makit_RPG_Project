@@ -19,7 +19,6 @@ public class StoreNPC_Phsical : MonoBehaviour
 
     [Header("Select Panel Information")]
     public GameObject StoreNPC_SelectAction_Panel;
-    private bool seletAction_Actived = false;
     public StoreNPC_SeletAction newSelectAction;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -37,18 +36,12 @@ public class StoreNPC_Phsical : MonoBehaviour
         }
     }
 
-    public void SetActive_Select_Panel()
-    {
-        seletAction_Actived = !seletAction_Actived;
-        StoreNPC_SelectAction_Panel.SetActive(seletAction_Actived);
-    }
-
     void Update()
     {
         // Finish talking
         if (Ontrigger && !DialogueManager.instance.m_IsTalking)
         {
-            SetActive_Select_Panel();
+            StoreNPC_SelectAction_Panel.SetActive(true);
             Ontrigger = false;
         }
     }

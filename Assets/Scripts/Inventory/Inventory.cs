@@ -5,16 +5,19 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    [Header("Inventory Information")]
+    [Header("UI Stuff to change")]
+    public Text Text_Coin;
+
+    [Header("Variables from the others")]
     public Player player;
     public PlayerInventory PlayerInventory;
 
+    [Header("Inventory Information")]
     public GameObject blankInventorySlot;
     public GameObject inventoryPanel;
     private bool activeInventory = false;
     public Transform itemParent;
 
-    public Text Text_Coin;
     public GameObject OkorCanclePanel;
 
     public Item currentItem;
@@ -62,7 +65,6 @@ public class Inventory : MonoBehaviour
                         newSlot.Setup(PlayerInventory.myInventory[i], this);
                     }
                 }
-
             }
         }
     }

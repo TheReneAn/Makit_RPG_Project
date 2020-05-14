@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
         m_CanMove = true;
         m_CanAtk = true;
         enemy = GetComponent<Enemy>();
+        GameManager.Instance.g_PlayerCurrentHP = GameManager.Instance.g_PlayerHP;
     }
 
     void Update()
@@ -141,6 +142,18 @@ public class Player : MonoBehaviour
                 m_Anim.SetBool("Idle", false);
                 Invoke("GameOver", 5);
             }
+        }
+
+        // collide obstacle
+        int layerMask = 1 << LayerMask.NameToLayer("Obstacle");
+        if(Physics2D.Raycast(transform.position, m_DirVec, 20, layerMask))
+        {
+            Idle();
+            CanNotMove();
+        }
+        else
+        {
+            CanMove();
         }
     }
 

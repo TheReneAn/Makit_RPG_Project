@@ -12,8 +12,12 @@ public class StoreNPC_SeletAction : MonoBehaviour
 
     public Sprite[] Temp_NPC_sprite;
 
+    public GameObject StoreSellPanel;
+
+    [Header("Variables from the other")]
     private Player player;
     private StoreNPC_Phsical this_StoreNPC_Phsical;
+    public UI_Store_Sell ui_store_sell;
 
     void Start()
     {
@@ -32,7 +36,7 @@ public class StoreNPC_SeletAction : MonoBehaviour
         {
             ShowNPC.sprite = Temp_NPC_sprite[0];
         }
-        else
+        else if (NPC_ID == 1001)
         {
             ShowNPC.sprite = Temp_NPC_sprite[1];
         }
@@ -40,30 +44,24 @@ public class StoreNPC_SeletAction : MonoBehaviour
 
     public void Btn_Buy()
     {
-        Debug.Log("Buy");
-
         // Close this panel
-        Btn_Close();
+        this_StoreNPC_Phsical.StoreNPC_SelectAction_Panel.SetActive(false);
+
+        Debug.Log("Buy");
     }
 
     public void Btn_Sell()
     {
-        Debug.Log("Sell");
-
         // Close this panel
-        Btn_Close();
+        this_StoreNPC_Phsical.StoreNPC_SelectAction_Panel.SetActive(false);
+
+        ui_store_sell.Setup(NPC_ID);
+        StoreSellPanel.SetActive(true);
     }
 
     public void Btn_Close()
     {
-        if (NPC_ID == 1000) // 1000: Genaral Store 
-        {
-            this_StoreNPC_Phsical.SetActive_Select_Panel();
-        }
-        else // 1001: Armor Store 
-        {
-            this_StoreNPC_Phsical.SetActive_Select_Panel();
-        }
+        this_StoreNPC_Phsical.StoreNPC_SelectAction_Panel.SetActive(false);
 
         player.CanMove();
     }

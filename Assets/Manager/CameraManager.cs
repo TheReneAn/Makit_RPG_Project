@@ -64,6 +64,7 @@ public class CameraManager : MonoBehaviour
     {
         if(m_Target.gameObject != null)
         {
+            Init();
             // camera movement
             m_TargetPosition.Set(m_Target.transform.position.x, m_Target.transform.position.y, transform.position.z);
 
@@ -76,11 +77,25 @@ public class CameraManager : MonoBehaviour
         }
     }
 
+    void Init()
+    {
+        m_Camera = FindObjectOfType<Camera>();
+        m_Target = FindObjectOfType<Player>().gameObject;
+        m_MoveSpeed = 3.0f;
+        m_MinBound = m_Bound.bounds.min;
+        m_MaxBound = m_Bound.bounds.max;
+        m_HalfHeight = m_Camera.orthographicSize;
+        m_HalfWidth = m_HalfHeight * Screen.width / Screen.height;
+    }
     // set new boundary setting func
     public void SetBound(BoxCollider2D newBound)
     {
         m_Bound = newBound;
         m_MinBound = m_Bound.bounds.min;
         m_MaxBound = m_Bound.bounds.max;
+    }
+    public void SetCameraSize(float size)
+    {
+        m_Camera.orthographicSize = size;
     }
 }

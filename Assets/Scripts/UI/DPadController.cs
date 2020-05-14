@@ -76,4 +76,11 @@ public class DPadController : MonoBehaviour
     {
             m_DownMove = false;
     }
+    public void Idle()
+    {
+        m_DownMove = false;
+        m_TopMove = false;
+        m_RightMove = false;
+        m_LeftMove = false;
+    }
 }

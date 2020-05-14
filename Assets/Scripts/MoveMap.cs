@@ -6,6 +6,7 @@ public class MoveMap : MonoBehaviour
 {
     public Transform m_Target;            // move to target
     public BoxCollider2D m_TargetBound;   // target boundary
+    public float m_CameraSize;
 
     private Player m_Player;            // player
     private CameraManager m_Camera;     // camera
@@ -23,6 +24,7 @@ public class MoveMap : MonoBehaviour
         {
             m_Camera.transform.position = new Vector3(m_Target.transform.position.x, m_Target.transform.position.y, m_Camera.transform.position.z);
             m_Camera.SetBound(m_TargetBound);
+            m_Camera.SetCameraSize(m_CameraSize);
             m_Player.transform.position = new Vector3(m_Target.transform.position.x, m_Target.transform.position.y, 0);
         }
     }

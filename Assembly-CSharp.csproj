@@ -74,6 +74,7 @@
     <Compile Include="Assets\Manager\GameManager.cs" />
     <Compile Include="Assets\Manager\NPCManager.cs" />
     <Compile Include="Assets\Manager\QuestManager.cs" />
+    <Compile Include="Assets\Manager\ShopManager.cs" />
     <Compile Include="Assets\Scripts\ChangeSceneButton.cs" />
     <Compile Include="Assets\Scripts\Dialogue.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Assets\Scripts\Store\Shop_Slot.cs" />
     <Compile Include="Assets\Scripts\Store\StoreNPC_Phsical.cs" />
     <Compile Include="Assets\Scripts\Store\StoreNPC_SeletAction.cs" />
+    <Compile Include="Assets\Scripts\Store\UI_Store_Sell.cs" />
     <Compile Include="Assets\Scripts\UI\DPadController.cs" />
     <Compile Include="Assets\Scripts\UI\DiagTest.cs" />
     <Compile Include="Assets\Scripts\UI\Field_UI.cs" />
@@ -140,11 +142,13 @@
     <None Include="Assets\Tiled2Unity\Shaders\shaDefault.shader" />
     <None Include="Assets\Tiled2Unity\Imported\_ReadMe.txt" />
     <None Include="Assets\Tiled2Unity\Imported\armor store.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\Forest road.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Imported\town.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Shaders\shaColorKey-Instanced.shader" />
     <None Include="Assets\Tiled2Unity\Shaders\shaDepth-Instanced.shader" />
     <None Include="Assets\Tiled2Unity\Imported\Library.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Prefabs\_ReadMe.txt" />
+    <None Include="Assets\Tiled2Unity\Imported\Forest boss.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Shaders\shaColorKey.shader" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
