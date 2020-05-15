@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UI_Store_Sell : MonoBehaviour
 {
-    public int WhichStore = 0;  // 1000: General, 1001: Armor
+    public int WhichStore;  // 1000: General, 1001: Armor
 
     [Header("UI Stuff to change")]
     public Text Text_TotalMoney_Sell;
@@ -13,7 +13,6 @@ public class UI_Store_Sell : MonoBehaviour
     [Header("Variables from the other")]
     public Player player;
     public PlayerInventory PlayerInventory;
-    private StoreNPC_SeletAction this_SelectAction;
 
     [Header("Store Sell Information")]
     public GameObject blankStoreSellSlot;
@@ -35,6 +34,8 @@ public class UI_Store_Sell : MonoBehaviour
             StoreSellPanel.SetActive(false);
             player.CanMove();
         }
+
+
     }
 
     public void MakeStoreSellSlots()
@@ -43,14 +44,33 @@ public class UI_Store_Sell : MonoBehaviour
         {
             for (int i = 0; i < PlayerInventory.myInventory.Count; i++)
             {
-                if (PlayerInventory.myInventory[i].itemCount > 0)
+                // 1000: General
+                if (WhichStore == 1000)
                 {
-                    GameObject temp = Instantiate(blankStoreSellSlot, SellListParent);
-                    Shop_Slot newSlot = temp.GetComponent<Shop_Slot>();
-
-                    if (newSlot)
+                    if (PlayerInventory.myInventory[i].itemType == Item.ItemType.Use)
                     {
-                        newSlot.Sell_Setup(PlayerInventory.myInventory[i]);
+                        GameObject StoreSelltemp = Instantiate(blankStoreSellSlot, SellListParent);
+                        Shop_Slot newStoreSellSlot = StoreSelltemp.GetComponent<Shop_Slot>();
+
+                        if (newStoreSellSlot)
+                        {
+                            newStoreSellSlot.Sell_Setup(PlayerInventory.myInventory[i]);
+                        }
+                    }
+
+                }
+                // 1001: Armor
+                else if (WhichStore == 1001)
+                {
+                    if (PlayerInventory.myInventory[i].itemType == Item.ItemType.Equip)
+                    {
+                        GameObject StoreSelltemp = Instantiate(blankStoreSellSlot, SellListParent);
+                        Shop_Slot newStoreSellSlot = StoreSelltemp.GetComponent<Shop_Slot>();
+
+                        if (newStoreSellSlot)
+                        {
+                            newStoreSellSlot.Sell_Setup(PlayerInventory.myInventory[i]);
+                        }
                     }
                 }
             }
@@ -63,13 +83,6 @@ public class UI_Store_Sell : MonoBehaviour
         {
             Destroy(SellListParent.transform.GetChild(i).gameObject);
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        ClearInventorySlots();
-        MakeStoreSellSlots();
     }
 
     // Update is called once per frame

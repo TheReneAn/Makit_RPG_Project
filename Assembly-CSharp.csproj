@@ -74,7 +74,6 @@
     <Compile Include="Assets\Manager\GameManager.cs" />
     <Compile Include="Assets\Manager\NPCManager.cs" />
     <Compile Include="Assets\Manager\QuestManager.cs" />
-    <Compile Include="Assets\Manager\ShopManager.cs" />
     <Compile Include="Assets\Scripts\ChangeSceneButton.cs" />
     <Compile Include="Assets\Scripts\Dialogue.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
