@@ -55,7 +55,7 @@ public class StoreNPC_SeletAction : MonoBehaviour
         // Close this panel
         this_StoreNPC_Phsical.StoreNPC_SelectAction_Panel.SetActive(false);
 
-        ui_store_sell.Setup(NPC_ID);
+        ui_store_sell.Setup(NPC_ID, ShowNPC);
         ui_store_sell.CloseStoreSellUI();
         ui_store_sell.MakeStoreSellSlots();
         StoreSellPanel.SetActive(true);

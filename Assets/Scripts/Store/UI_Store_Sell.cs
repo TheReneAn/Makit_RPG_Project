@@ -8,7 +8,10 @@ public class UI_Store_Sell : MonoBehaviour
     public int WhichStore;  // 1000: General, 1001: Armor
 
     [Header("UI Stuff to change")]
+    public Image thisStoreNPC;
+    public Sprite[] Temp_NPC_sprite;
     public Text Text_TotalMoney_Sell;
+    public int int_TotalMoney_Sell;
 
     [Header("Variables from the other")]
     public Player player;
@@ -17,25 +20,38 @@ public class UI_Store_Sell : MonoBehaviour
     [Header("Store Sell Information")]
     public GameObject blankStoreSellSlot;
     public GameObject StoreSellPanel;
-    private bool activeStoreSellUI = false;
     public Transform SellListParent;
 
-    public void Setup(int Select_Action_NPC_ID)
+    public void Setup(int Select_Action_NPC_ID, Image newthisStoreNPC)
     {
         WhichStore = Select_Action_NPC_ID;
+        if (WhichStore == 1000)  // 1000: Genaral Store 
+        {
+            thisStoreNPC.sprite = Temp_NPC_sprite[0];
+        }
+        else if (WhichStore == 1001)
+        {
+            thisStoreNPC.sprite = Temp_NPC_sprite[1];
+        }
+    }
+
+    public void BtnSellIntheUI()
+    {
+        GameManager.Instance.g_Money += int_TotalMoney_Sell;
+
+
+        // Reset
+        int_TotalMoney_Sell = 0;
     }
 
     public void CloseStoreSellUI()
     {
-        activeStoreSellUI = !activeStoreSellUI;
+        StoreSellPanel.SetActive(false);
+        ClearInventorySlots();
+        player.CanMove();
 
-        if (activeStoreSellUI == true)
-        {
-            StoreSellPanel.SetActive(false);
-            player.CanMove();
-        }
-
-
+        // Reset
+        int_TotalMoney_Sell = 0;
     }
 
     public void MakeStoreSellSlots()
@@ -54,7 +70,7 @@ public class UI_Store_Sell : MonoBehaviour
 
                         if (newStoreSellSlot)
                         {
-                            newStoreSellSlot.Sell_Setup(PlayerInventory.myInventory[i]);
+                            newStoreSellSlot.SellSlot_Setup(PlayerInventory.myInventory[i], this);
                         }
                     }
 
@@ -69,7 +85,7 @@ public class UI_Store_Sell : MonoBehaviour
 
                         if (newStoreSellSlot)
                         {
-                            newStoreSellSlot.Sell_Setup(PlayerInventory.myInventory[i]);
+                            newStoreSellSlot.SellSlot_Setup(PlayerInventory.myInventory[i], this);
                         }
                     }
                 }
@@ -88,6 +104,10 @@ public class UI_Store_Sell : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Text_TotalMoney_Sell.text = int_TotalMoney_Sell.ToString();
+        if (int_TotalMoney_Sell < 0)
+        {
+            int_TotalMoney_Sell = 0;
+        }
     }
 }

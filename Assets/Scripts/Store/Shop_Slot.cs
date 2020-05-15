@@ -11,14 +11,17 @@ public class Shop_Slot : MonoBehaviour
     public Text itemPrice;
     public Text itemOwnCount;
     public Text show_itemqty;
-    private int int_itemqty = 0;
+    private int int_itemqty;
 
     [Header("Variables from the others")]
     public Item thisItem;
+    public UI_Store_Sell thisStoreSell;
 
-    public void Sell_Setup(Item newItem)
+    public void SellSlot_Setup(Item newItem, UI_Store_Sell newStoreSell)
     {
+        int_itemqty = 0;
         thisItem = newItem;
+        thisStoreSell = newStoreSell;
 
         if (thisItem)
         {
@@ -48,23 +51,24 @@ public class Shop_Slot : MonoBehaviour
         {
             int_itemqty = 999;
         }
+        else
+        {
+            thisStoreSell.int_TotalMoney_Sell += thisItem.itemPrice;
+        }
     }
 
     public void Btn_Qty_down()
     {
         int_itemqty -= 1;
 
-        if (int_itemqty <= 0)
+        if (int_itemqty < 0)
         {
             int_itemqty = 0;
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        // Setting item qty
-        int_itemqty = 0;
+        else
+        {
+            thisStoreSell.int_TotalMoney_Sell -= thisItem.itemPrice;
+        }
     }
 
     // Update is called once per frame
