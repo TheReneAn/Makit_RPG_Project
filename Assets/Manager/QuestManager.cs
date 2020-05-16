@@ -35,9 +35,18 @@ public class QuestManager : MonoBehaviour
     }
     #endregion
 
-    // Rene part
+    public QuestObj[] g_Quests;
+    public bool[] g_QuestCompleted;
 
 
+    void Start()
+    {
+        g_QuestCompleted = new bool[g_Quests.Length];
+    }
 
-    // Teddy part
+    public void ShowQuestText(string questText)
+    {
+
+    }
+
 }

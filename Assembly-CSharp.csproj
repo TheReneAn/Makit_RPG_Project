@@ -74,7 +74,6 @@
     <Compile Include="Assets\Manager\GameManager.cs" />
     <Compile Include="Assets\Manager\NPCManager.cs" />
     <Compile Include="Assets\Manager\QuestManager.cs" />
-    <Compile Include="Assets\Manager\ShopManager.cs" />
     <Compile Include="Assets\Scripts\ChangeSceneButton.cs" />
     <Compile Include="Assets\Scripts\Dialogue.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
@@ -92,6 +91,7 @@
     <Compile Include="Assets\Scripts\NormalDamage.cs" />
     <Compile Include="Assets\Scripts\ParticleSystemOrder.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\QuestObj.cs" />
     <Compile Include="Assets\Scripts\Save.cs" />
     <Compile Include="Assets\Scripts\SkillDamage.cs" />
     <Compile Include="Assets\Scripts\Store\Shop_Slot.cs" />

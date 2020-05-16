@@ -11,7 +11,7 @@ public class Shop_Slot : MonoBehaviour
     public Text itemPrice;
     public Text itemOwnCount;
     public Text show_itemqty;
-    private int int_itemqty;
+    public int int_itemqty;
 
     [Header("Variables from the others")]
     public Item thisItem;
@@ -51,6 +51,10 @@ public class Shop_Slot : MonoBehaviour
         {
             int_itemqty = 999;
         }
+        else if (int_itemqty > thisItem.itemCount)
+        {
+            int_itemqty = thisItem.itemCount;
+        }
         else
         {
             thisStoreSell.int_TotalMoney_Sell += thisItem.itemPrice;
@@ -71,9 +75,15 @@ public class Shop_Slot : MonoBehaviour
         }
     }
 
+    public int Get_item_itemqty()
+    {
+        return thisItem.itemCount -= int_itemqty;
+    }
+
     // Update is called once per frame
     void Update()
     {
         show_itemqty.text = int_itemqty.ToString();
+        itemOwnCount.text = "" + thisItem.itemCount;
     }
 }

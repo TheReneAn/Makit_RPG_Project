@@ -43,6 +43,12 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            DialogueManager.instance.ShowDialogue(DialogueManager.instance.g_Dialogue[0]);
+        }
+
         // set player status
         SetStatus();
 

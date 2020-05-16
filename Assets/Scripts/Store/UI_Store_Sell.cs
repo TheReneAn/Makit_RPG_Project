@@ -12,6 +12,7 @@ public class UI_Store_Sell : MonoBehaviour
     public Sprite[] Temp_NPC_sprite;
     public Text Text_TotalMoney_Sell;
     public int int_TotalMoney_Sell;
+    public Text Text_Playesmoney;
 
     [Header("Variables from the other")]
     public Player player;
@@ -21,6 +22,8 @@ public class UI_Store_Sell : MonoBehaviour
     public GameObject blankStoreSellSlot;
     public GameObject StoreSellPanel;
     public Transform SellListParent;
+
+    public List<GameObject> slots = new List<GameObject>();
 
     public void Setup(int Select_Action_NPC_ID, Image newthisStoreNPC)
     {
@@ -39,6 +42,13 @@ public class UI_Store_Sell : MonoBehaviour
     {
         GameManager.Instance.g_Money += int_TotalMoney_Sell;
 
+        // thisitem count - qty
+        for (int i = 0; i < slots.Count; i++)
+        {
+            Shop_Slot slot = slots[i].GetComponent<Shop_Slot>();
+            slot.Get_item_itemqty();
+            slot.int_itemqty = 0;
+        }
 
         // Reset
         int_TotalMoney_Sell = 0;
@@ -67,6 +77,7 @@ public class UI_Store_Sell : MonoBehaviour
                     {
                         GameObject StoreSelltemp = Instantiate(blankStoreSellSlot, SellListParent);
                         Shop_Slot newStoreSellSlot = StoreSelltemp.GetComponent<Shop_Slot>();
+                        slots.Add(StoreSelltemp);
 
                         if (newStoreSellSlot)
                         {
@@ -108,6 +119,12 @@ public class UI_Store_Sell : MonoBehaviour
         if (int_TotalMoney_Sell < 0)
         {
             int_TotalMoney_Sell = 0;
+        }
+
+        Text_Playesmoney.text = "" + GameManager.Instance.g_Money;
+        if (GameManager.Instance.g_Money < 0)
+        {
+            GameManager.Instance.g_Money = 0;
         }
     }
 }

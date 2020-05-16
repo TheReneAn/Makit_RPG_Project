@@ -43,6 +43,7 @@ public class DialogueManager : MonoBehaviour
     public SpriteRenderer m_DialogueWindowRenderer;     // dialogue windows
     public GameObject m_DiagMgrObj;
     public GameObject m_ControllerObj;
+    public Dialogue[] g_Dialogue;
 
     private Player m_Player;                            // player
     private DPadController m_DCon;
