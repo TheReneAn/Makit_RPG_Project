@@ -25,11 +25,11 @@ public class Player : MonoBehaviour
     public bool m_CanMove;                  // can move or not
     public bool m_CanAtk;                   // can attack or not
 
-    private RaycastHit2D rayHit;             // attack ray
     private Vector3 m_DirVec;               // attack ray direction
     private float m_CurTime;                // manaregen current time
     private bool m_Die;                // 
     private Enemy enemy;                    // enemy
+    GameObject scanObject;
 
 
     void Start()
@@ -43,7 +43,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.T))
         {
             DialogueManager.instance.ShowDialogue(DialogueManager.instance.g_Dialogue[0]);
@@ -64,33 +63,8 @@ public class Player : MonoBehaviour
             }
         }
 
-        m_Anim.SetBool("IsChange", false);
-
-        // player idle check
-        if (m_Anim.GetInteger("HorizontalMove") == 0 && m_Anim.GetInteger("VerticalMove") == 0)
-        {
-            m_Anim.SetBool("Idle", true);
-        }
-        else
-        {
-            m_Anim.SetBool("Idle", false);
-        }
-
         // player moving animation
-        if (m_Anim.GetInteger("HorizontalMove") != m_Vector.x)
-        {
-            m_Anim.SetBool("IsChange", true);
-            m_Anim.SetInteger("HorizontalMove", (int)m_Vector.x);
-        }
-        else if (m_Anim.GetInteger("VerticalMove") != m_Vector.y)
-        {
-            m_Anim.SetBool("IsChange", true);
-            m_Anim.SetInteger("VerticalMove", (int)m_Vector.y);
-        }
-        else
-        {
-            m_Anim.SetBool("IsChange", false);
-        }
+        Animation();
 
         // draw ray direction
         if (m_Vector.x == 1)
@@ -111,11 +85,13 @@ public class Player : MonoBehaviour
         }
 
         // if text activate, it will destory
-        if(m_LackOfManaText.activeSelf)
+        if (m_LackOfManaText != null)
         {
-            Invoke("NotEnoughManaDestroy", 1.0f);
+            if (m_LackOfManaText.activeSelf)
+            {
+                Invoke("NotEnoughManaDestroy", 1.0f);
+            }
         }
-
         // player level sequence
         if(GameManager.Instance.g_PlayerEXP >= GameManager.Instance.maxLevelUpEXP[GameManager.Instance.g_PlayerLevel])
         {
@@ -163,6 +139,36 @@ public class Player : MonoBehaviour
         }
     }
 
+
+    public void Animation()
+    {
+        m_Anim.SetBool("IsChange", false);
+
+        // player idle check
+        if (m_Anim.GetInteger("HorizontalMove") == 0 && m_Anim.GetInteger("VerticalMove") == 0)
+        {
+            m_Anim.SetBool("Idle", true);
+        }
+        else
+        {
+            m_Anim.SetBool("Idle", false);
+        }
+
+        if (m_Anim.GetInteger("HorizontalMove") != m_Vector.x)
+        {
+            m_Anim.SetBool("IsChange", true);
+            m_Anim.SetInteger("HorizontalMove", (int)m_Vector.x);
+        }
+        else if (m_Anim.GetInteger("VerticalMove") != m_Vector.y)
+        {
+            m_Anim.SetBool("IsChange", true);
+            m_Anim.SetInteger("VerticalMove", (int)m_Vector.y);
+        }
+        else
+        {
+            m_Anim.SetBool("IsChange", false);
+        }
+    }
     void GameOver()
     {
         GameManager.Instance.SceneChange("GameOver");
@@ -171,7 +177,7 @@ public class Player : MonoBehaviour
     // action func
     public void Action()
     {
-        if(m_IsPlayerField)
+        if (m_IsPlayerField)
         {
             // Field function
             m_CanMove = false;
@@ -180,7 +186,20 @@ public class Player : MonoBehaviour
         else
         {
             // Village function
+            //Debug.DrawRay(transform.position, m_DirVec * 30, Color.red, 0.5f);
+            //RaycastHit2D rayHit = Physics2D.Raycast(transform.position, m_DirVec, 0.3f, LayerMask.GetMask("NPC"));
 
+            //if (rayHit.collider != null)
+            //{
+            //    scanObject = rayHit.collider.gameObject;
+
+            //    Debug.Log("Collide");
+            //    scanObject.GetComponent<QuestObj>().CheckQuest();
+            //}
+            //else
+            //{
+            //    scanObject = null;
+            //}
         }
     }
 
@@ -189,6 +208,9 @@ public class Player : MonoBehaviour
         m_NormalDamageCol.SetActive(true);
         m_NormalDamageCol.transform.position = transform.position + m_DirVec * 0.7f;
         transform.Translate(new Vector2(m_DirVec.x * Time.deltaTime * m_Speed, m_DirVec.y * Time.deltaTime * m_Speed));
+        //iTween.MoveBy(gameObject, new Vector2(m_DirVec.x * Time.deltaTime * 1000, m_DirVec.y * Time.deltaTime * 1000), 0.5f);
+
+        iTween.MoveBy(gameObject, iTween.Hash("x", m_DirVec.x * Time.deltaTime * 1000, "y", m_DirVec.y * Time.deltaTime * 1000, "time", 0.3f, "easetype", iTween.EaseType.easeOutQuint));
     }
 
     public void AttackEnd()

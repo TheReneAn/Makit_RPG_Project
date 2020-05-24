@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 public class DPadController : MonoBehaviour
 {
     public Player player;
-    public float temp;
     public bool m_CanControl;
     public bool m_LeftMove;
     public bool m_TopMove;

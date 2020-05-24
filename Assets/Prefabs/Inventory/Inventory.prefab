@@ -1175,13 +1175,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4804f07c6f6d964a87ed00871b4cb79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Text_Coin: {fileID: 8677432126300339142}
   player: {fileID: 0}
   PlayerInventory: {fileID: 11400000, guid: cb18b7c00065858469c3bc8fd0e6f6c7, type: 2}
   blankInventorySlot: {fileID: 5486243183175665236, guid: 6dd8e8ba2642e9945acfb46ae3356b99,
     type: 3}
   inventoryPanel: {fileID: 2314529969589561840}
   itemParent: {fileID: 5421589630583151365}
-  Text_Coin: {fileID: 8677432126300339142}
   OkorCanclePanel: {fileID: 6083467607980497565, guid: cd3c2b2263e68c54390084e7c02a01f8,
     type: 3}
   currentItem: {fileID: 0}

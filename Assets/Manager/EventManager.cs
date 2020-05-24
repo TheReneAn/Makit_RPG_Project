@@ -34,7 +34,8 @@ public class EventManager : MonoBehaviour
         }
     }
     #endregion
-    private Player m_player;            // player object
+    private GameObject m_player;            // player object
+    private GameObject m_Dpad;            // player object
     private Vector2 m_PrevPlayerPos;    // start player position
     private float m_Dist;               // member distance 
     private float m_DistX;              // distance X 
@@ -47,22 +48,29 @@ public class EventManager : MonoBehaviour
     public bool g_IsEventEnd;             // check moving
     void Start()
     {
-        m_player = FindObjectOfType<Player>();
+        m_player = GameObject.Find("Player");
         m_Checker = true;
         g_IsEventEnd = false;
     }
 
     void Update()
     {
+        g_IsEventEnd = false;
         // player moving process (when start event move) 
         if (m_PlayerMoveRight)
+        {
+            m_player.GetComponent<Player>().Animation();
             PlayerMoveRight();
+        }
         else if (m_PlayerMoveLeft)
             PlayerMoveLeft();
         else if (m_PlayerMoveUp)
             PlayerMoveUp();
         else if (m_PlayerMoveDown)
+        {
+            m_player.GetComponent<Player>().Animation();
             PlayerMoveDown();
+        }
     }
 
     // setting the first position
@@ -80,20 +88,20 @@ public class EventManager : MonoBehaviour
     }
     private void PlayerMoveRight()
     {
-        m_player.RightMove();
+        m_player.GetComponent<Player>().RightMove();
         if (m_Checker)
         {
             CheckPlayerPosition();
             m_Checker = false;
         }
-        m_player.CanNotControl();
+        m_player.GetComponent<Player>().CanNotControl();
 
         if (m_Dist >= m_DistX)
         {
             m_PlayerMoveRight = false;
             g_IsEventEnd = true;
             m_Checker = true;
-            m_player.CanControl();
+            m_player.GetComponent<Player>().CanControl();
         }
         m_Dist = Mathf.Abs(Mathf.Abs(m_player.transform.position.x) - Mathf.Abs(m_PrevPlayerPos.x));
     }
@@ -107,20 +115,20 @@ public class EventManager : MonoBehaviour
     }
     private void PlayerMoveLeft()
     {
-        m_player.LeftMove();
+        m_player.GetComponent<Player>().LeftMove();
         if (m_Checker)
         {
             CheckPlayerPosition();
             m_Checker = false;
         }
-        m_player.CanNotControl();
+        m_player.GetComponent<Player>().CanNotControl();
 
         if (m_Dist >= m_DistX)
         {
             m_PlayerMoveLeft = false;
             g_IsEventEnd = true;
             m_Checker = true;
-            m_player.CanControl();
+            m_player.GetComponent<Player>().CanControl();
         }
         m_Dist = Mathf.Abs(Mathf.Abs(m_player.transform.position.x) - Mathf.Abs(m_PrevPlayerPos.x));
     }
@@ -134,20 +142,20 @@ public class EventManager : MonoBehaviour
     }
     private void PlayerMoveUp()
     {
-        m_player.TopMove();
+        m_player.GetComponent<Player>().TopMove();
         if (m_Checker)
         {
             CheckPlayerPosition();
             m_Checker = false;
         }
-        m_player.CanNotControl();
+        m_player.GetComponent<Player>().CanNotControl();
 
         if (m_Dist >= m_DistY)
         {
             m_PlayerMoveUp = false;
             g_IsEventEnd = true;
             m_Checker = true;
-            m_player.CanControl();
+            m_player.GetComponent<Player>().CanControl();
         }
         m_Dist = Mathf.Abs(Mathf.Abs(m_player.transform.position.y) - Mathf.Abs(m_PrevPlayerPos.y));
     }
@@ -160,22 +168,27 @@ public class EventManager : MonoBehaviour
     }
     private void PlayerMoveDown()
     {
-        m_player.DownMove();
+        m_player.GetComponent<Player>().DownMove();
         if (m_Checker)
         {
             m_Dist = 0;
             CheckPlayerPosition();
             m_Checker = false;
         }
-        m_player.CanNotControl();
+        m_player.GetComponent<Player>().CanNotControl();
 
         if (m_Dist >= m_DistY)
         {
             m_PlayerMoveDown = false;
             g_IsEventEnd = true;
             m_Checker = true;
-            m_player.CanControl();
+            m_player.GetComponent<Player>().CanControl();
         }
         m_Dist = Mathf.Abs(Mathf.Abs(m_player.transform.position.y) - Mathf.Abs(m_PrevPlayerPos.y));
+    }
+
+    public Vector2 PlayerVector()
+    {
+        return m_player.GetComponent<Player>().m_Vector;
     }
 }

@@ -35,18 +35,6 @@ public class QuestManager : MonoBehaviour
     }
     #endregion
 
-    public QuestObj[] g_Quests;
-    public bool[] g_QuestCompleted;
-
-
-    void Start()
-    {
-        g_QuestCompleted = new bool[g_Quests.Length];
-    }
-
-    public void ShowQuestText(string questText)
-    {
-
-    }
-
+    public List<Quest> g_QuestList = new List<Quest>();         // all quest list
+    public List<Quest> g_CurrentQuestList = new List<Quest>();  // current quest list
 }

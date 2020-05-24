@@ -231,6 +231,7 @@ public class Enemy : MonoBehaviour
         if (m_Anim.GetBool("IsChange"))
         {
             TakeEXP();
+            GameManager.Instance.g_TotalKillCount++;
         }
     }
 

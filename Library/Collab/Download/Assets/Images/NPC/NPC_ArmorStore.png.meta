@@ -1,0 +1,503 @@
+fileFormatVersion: 2
+guid: 96434efdc6b25914aa981e6ff543622f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4478727046312599368
+    second: NPC_ArmorStore_0
+  - first:
+      213: -7909034740174112858
+    second: NPC_ArmorStore_1
+  - first:
+      213: 875798157611289828
+    second: NPC_ArmorStore_2
+  - first:
+      213: -407387747674632406
+    second: NPC_ArmorStore_3
+  - first:
+      213: 7196210662392458340
+    second: NPC_ArmorStore_4
+  - first:
+      213: -5198154783411840829
+    second: NPC_ArmorStore_5
+  - first:
+      213: -8524714719808133354
+    second: NPC_ArmorStore_6
+  - first:
+      213: 9059032793211479656
+    second: NPC_ArmorStore_7
+  - first:
+      213: -2862873823717280634
+    second: NPC_ArmorStore_8
+  - first:
+      213: -3044318699440441797
+    second: NPC_ArmorStore_9
+  - first:
+      213: -7116835484495767362
+    second: NPC_ArmorStore_10
+  - first:
+      213: 3063923097092648427
+    second: NPC_ArmorStore_11
+  - first:
+      213: 6590175700488321096
+    second: NPC_ArmorStore_12
+  - first:
+      213: -7139286917363314433
+    second: NPC_ArmorStore_13
+  - first:
+      213: -8380908017881841643
+    second: NPC_ArmorStore_14
+  - first:
+      213: -8888244511923544110
+    second: NPC_ArmorStore_15
+  - first:
+      213: 7573935441937881533
+    second: NPC_ArmorStore_16
+  - first:
+      213: 2433926568137324493
+    second: NPC_ArmorStore_17
+  - first:
+      213: -5783699917344919010
+    second: NPC_ArmorStore_18
+  - first:
+      213: 4780151503489099950
+    second: NPC_ArmorStore_19
+  - first:
+      213: 4761805575707090228
+    second: NPC_ArmorStore_20
+  - first:
+      213: 8879203417932156878
+    second: NPC_ArmorStore_21
+  - first:
+      213: -8432025488291391835
+    second: NPC_ArmorStore_22
+  - first:
+      213: 2621044846975992123
+    second: NPC_ArmorStore_23
+  - first:
+      213: 2861599979894666527
+    second: NPC_ArmorStore_24
+  - first:
+      213: -3309225062820076107
+    second: NPC_ArmorStore_25
+  - first:
+      213: -1195060585765199128
+    second: NPC_ArmorStore_26
+  - first:
+      213: 7903700003098813152
+    second: NPC_ArmorStore_27
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: NPC_ArmorStore_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 321
+        width: 81
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b06a9e0b7d58d1c0800000000000000
+      internalID: -4478727046312599368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NPC_ArmorStore_14
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 217
+        width: 81
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5100eeacf8801bb80800000000000000
+      internalID: -8380908017881841643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NPC_ArmorStore_15
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 217
+        width: 81
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2df5bf555bc96a480800000000000000
+      internalID: -8888244511923544110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NPC_ArmorStore_16
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 217
+        width: 81
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db9d270f7260c1960800000000000000
+      internalID: 7573935441937881533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NPC_ArmorStore_17
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 217
+        width: 81
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc7f537715b07c120800000000000000
+      internalID: 2433926568137324493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NPC_ArmorStore_18
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 113
+        width: 81
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e12333b819b2cbfa0800000000000000
+      internalID: -5783699917344919010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NPC_ArmorStore_19
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 113
+        width: 82
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea864025772865240800000000000000
+      internalID: 4780151503489099950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NPC_ArmorStore_20
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 113
+        width: 83
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43dde7521f4551240800000000000000
+      internalID: 4761805575707090228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NPC_ArmorStore_21
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 113
+        width: 85
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecfc74ee674493b70800000000000000
+      internalID: 8879203417932156878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NPC_ArmorStore_22
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 113
+        width: 84
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a61a514e7d6bfa80800000000000000
+      internalID: -8432025488291391835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NPC_ArmorStore_23
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 113
+        width: 82
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b314f54c662df5420800000000000000
+      internalID: 2621044846975992123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NPC_ArmorStore_24
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 9
+        width: 81
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f15f2e2350276b720800000000000000
+      internalID: 2861599979894666527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NPC_ArmorStore_25
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 9
+        width: 81
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b52ac0a6554312d0800000000000000
+      internalID: -3309225062820076107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NPC_ArmorStore_26
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 9
+        width: 81
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e2256c9aba4a6fe0800000000000000
+      internalID: -1195060585765199128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NPC_ArmorStore_27
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 9
+        width: 81
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e265f7f6459fad60800000000000000
+      internalID: 7903700003098813152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

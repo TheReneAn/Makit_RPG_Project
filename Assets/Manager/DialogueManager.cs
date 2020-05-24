@@ -54,6 +54,7 @@ public class DialogueManager : MonoBehaviour
     private int m_Count;                                // cound character (alphabet)
 
     public bool m_IsTalking = false;                   // is talking? check bool
+    public bool m_EndDialogue = false;
 
     // Teddy part function
     void Start()
@@ -110,6 +111,7 @@ public class DialogueManager : MonoBehaviour
         // player controll on
         m_Player.CanControl();
         m_Player.Idle();
+        m_EndDialogue = true;
     }
 
     // typing alphabet
@@ -147,6 +149,8 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        m_EndDialogue = false; 
+
         if (m_IsTalking)
         {
             if (Input.touchCount > 0 || Input.GetMouseButtonDown(0)) // next sentence
