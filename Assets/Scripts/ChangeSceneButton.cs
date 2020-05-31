@@ -22,6 +22,7 @@ public class ChangeSceneButton : MonoBehaviour
     }
     public void SceneVillage()
     {
+        GameManager.Instance.g_CheckSceneChange = true;
         GameManager.Instance.SceneChange("Village");
     }
 }

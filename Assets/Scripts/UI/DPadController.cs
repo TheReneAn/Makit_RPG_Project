@@ -40,24 +40,25 @@ public class DPadController : MonoBehaviour
         else
         {
             player.Idle();
+            GameManager.Instance.g_CheckSceneChange = false;
         }
     }
 
     public void LeftGetBottonDown()
     {
-            m_LeftMove = true;
+        m_LeftMove = true;
     }
     public void RightGetBottonDown()
     {
-            m_RightMove = true;
+        m_RightMove = true;
     }
     public void TopGetBottonDown()
     {
-            m_TopMove = true;
+        m_TopMove = true;
     }
     public void DownGetBottonDown()
     {
-            m_DownMove = true;
+        m_DownMove = true;
     }
     public void LeftGetBottonUp()
     {

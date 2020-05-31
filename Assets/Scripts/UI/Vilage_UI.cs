@@ -13,7 +13,6 @@ public class Vilage_UI : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        
+    {   
     }
 }

@@ -55,6 +55,10 @@ public class EventManager : MonoBehaviour
 
     void Update()
     {
+        if(m_player == null)
+        {
+            m_player = GameObject.Find("Player");
+        }
         g_IsEventEnd = false;
         // player moving process (when start event move) 
         if (m_PlayerMoveRight)

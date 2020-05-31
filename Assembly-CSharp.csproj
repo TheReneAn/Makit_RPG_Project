@@ -85,10 +85,12 @@
      <Compile Include="Assets\Scripts\NormalDamage.cs" />
      <Compile Include="Assets\Scripts\ParticleSystemOrder.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
+     <Compile Include="Assets\Scripts\Quest\FieldQuest_Main.cs" />
      <Compile Include="Assets\Scripts\Quest\Quest.cs" />
      <Compile Include="Assets\Scripts\Quest\QuestMoveGoal.cs" />
      <Compile Include="Assets\Scripts\Quest\QuestObj.cs" />
      <Compile Include="Assets\Scripts\Quest\QuestReward.cs" />
+     <Compile Include="Assets\Scripts\Quest\VillageQuest_Main.cs" />
      <Compile Include="Assets\Scripts\Save.cs" />
      <Compile Include="Assets\Scripts\SkillDamage.cs" />
      <Compile Include="Assets\Scripts\Store\Shop_Slot.cs" />

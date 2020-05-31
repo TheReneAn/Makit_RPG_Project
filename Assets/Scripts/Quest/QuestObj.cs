@@ -39,7 +39,7 @@ public class QuestObj : MonoBehaviour
             if (QuestManager.Instance.g_QuestList[m_QuestNum].m_KillQuest == true)
             {
                 // complete quest
-                if (QuestManager.Instance.g_QuestList[m_QuestNum].m_QuestKillCount <= 1 && QuestManager.Instance.g_QuestList[m_QuestNum].m_State != Quest.QuestState.DONE)
+                if (QuestManager.Instance.g_QuestList[m_QuestNum].m_QuestKillCount <= 0 && QuestManager.Instance.g_QuestList[m_QuestNum].m_State != Quest.QuestState.DONE)
                 {
                     QuestManager.Instance.g_QuestList[m_QuestNum].m_State = Quest.QuestState.COMPLETE;
                 }

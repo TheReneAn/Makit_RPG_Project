@@ -45,6 +45,8 @@ public class EventTutorial : MonoBehaviour
         }
         if (!DialogueManager.instance.m_IsTalking && m_Start3Event)
         {
+            GameManager.Instance.g_TutorialEnd = false;
+            GameManager.Instance.g_CurrentSceneNum = 1;
             GameManager.Instance.SceneChange("Village");
         }
     }

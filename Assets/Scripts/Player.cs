@@ -2,12 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     public float m_Speed;                   // player m_Speed
     public float m_ManaCoolTime;            // mana regene speed
-    public Animator m_Anim;                 // player animator
+    private Animator m_Anim;                 // player animator
     public Vector3 m_Vector;                // player move vector
     public GameObject m_SkillDamageCol;        // skill damage collider
     public GameObject m_NormalDamageCol;        // normal damage collider
@@ -16,9 +17,13 @@ public class Player : MonoBehaviour
     public GameObject m_LevelUpParticle;    // LevelUp effect
     public GameObject m_ControlPad;         // control pad 
     public GameObject m_Skill1Obj;          // skill 1 Obj
+    public Button     m_Skill1ObjButton;        // skill 1 button Obj
     public GameObject m_Skill2Obj;          // skill 2 Obj
     public GameObject m_UltimateObj;        // Ulti Obj  
     public GameObject m_GameOverTxt;        // Ulti Obj  
+    public GameObject m_MassagePanel;        // massage panel
+    public Text       m_MassagePanelTxt;        // Ulti Obj
+    public GameObject m_Camera;
 
     public bool m_IsPlayerField;            // where is player? 0 - Village, 1 - Field
     public bool m_LevelUp;
@@ -27,9 +32,10 @@ public class Player : MonoBehaviour
 
     private Vector3 m_DirVec;               // attack ray direction
     private float m_CurTime;                // manaregen current time
-    private bool m_Die;                // 
+    private bool m_Die;                     // when die
+    private bool m_Skill1Open;              //skill 1
     private Enemy enemy;                    // enemy
-    GameObject scanObject;
+    private GameObject scanObject;
 
 
     void Start()
@@ -37,15 +43,23 @@ public class Player : MonoBehaviour
         // init data
         m_CanMove = true;
         m_CanAtk = true;
+        m_Skill1Open = false;
         enemy = GetComponent<Enemy>();
+        SetStatus();
+        m_Anim = GetComponent<Animator>();
         GameManager.Instance.g_PlayerCurrentHP = GameManager.Instance.g_PlayerHP;
     }
 
     void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
+    { 
+        if (GameManager.Instance.g_CurrentSceneNum == 1 && GameManager.Instance.g_CheckSceneChange)
         {
-            DialogueManager.instance.ShowDialogue(DialogueManager.instance.g_Dialogue[0]);
+            transform.position = new Vector2(2200, -745);
+            m_Camera.transform.position = new Vector3(1680, -745, -1);
+        }
+        if (GameManager.Instance.g_CurrentSceneNum == 2 && GameManager.Instance.g_CheckSceneChange)
+        {
+            transform.position = new Vector2(150, -475);
         }
 
         // set player status
@@ -61,6 +75,19 @@ public class Player : MonoBehaviour
                 GameManager.Instance.g_PlayerCurrentMP++;
                 m_CurTime = 0;
             }
+        }
+
+        if (GameManager.Instance.g_PlayerLevel > 2 && GameManager.Instance.g_CurrentSceneNum == 2)
+        {
+            m_Skill1ObjButton.interactable = true;
+        }
+        else if(GameManager.Instance.g_CurrentSceneNum == 1 && GameManager.Instance.g_PlayerLevel <= 2)
+        {
+            m_Skill1ObjButton.interactable = false;
+        }
+        else
+        {
+
         }
 
         // player moving animation
@@ -101,10 +128,17 @@ public class Player : MonoBehaviour
             GameManager.Instance.g_PlayerAtk += 3;
             GameManager.Instance.g_PlayerDex += 3;
             GameManager.Instance.g_PlayerCon += 3;
+            SetStatus();
             GameManager.Instance.g_PlayerCurrentHP = GameManager.Instance.g_PlayerHP;
             GameManager.Instance.g_PlayerCurrentMP = GameManager.Instance.g_PlayerMP;
+            if(!m_Skill1Open && GameManager.Instance.g_PlayerLevel > 0)
+            {
+                m_Skill1Open = true;
+                m_Skill1ObjButton.interactable = true;
+                MassagepanelOn("You get Skill 1");
+            }
         }
-
+        // die situation
         if (GameManager.Instance.g_PlayerCurrentHP <= 0)
         {
             if (!m_Die)
@@ -179,27 +213,15 @@ public class Player : MonoBehaviour
     {
         if (m_IsPlayerField)
         {
+            GameManager.Instance.g_CheckSceneChange = false;
             // Field function
             m_CanMove = false;
             m_Anim.SetTrigger("Atk");
         }
         else
         {
+            GameManager.Instance.g_CheckSceneChange = false;
             // Village function
-            //Debug.DrawRay(transform.position, m_DirVec * 30, Color.red, 0.5f);
-            //RaycastHit2D rayHit = Physics2D.Raycast(transform.position, m_DirVec, 0.3f, LayerMask.GetMask("NPC"));
-
-            //if (rayHit.collider != null)
-            //{
-            //    scanObject = rayHit.collider.gameObject;
-
-            //    Debug.Log("Collide");
-            //    scanObject.GetComponent<QuestObj>().CheckQuest();
-            //}
-            //else
-            //{
-            //    scanObject = null;
-            //}
         }
     }
 
@@ -208,7 +230,6 @@ public class Player : MonoBehaviour
         m_NormalDamageCol.SetActive(true);
         m_NormalDamageCol.transform.position = transform.position + m_DirVec * 0.7f;
         transform.Translate(new Vector2(m_DirVec.x * Time.deltaTime * m_Speed, m_DirVec.y * Time.deltaTime * m_Speed));
-        //iTween.MoveBy(gameObject, new Vector2(m_DirVec.x * Time.deltaTime * 1000, m_DirVec.y * Time.deltaTime * 1000), 0.5f);
 
         iTween.MoveBy(gameObject, iTween.Hash("x", m_DirVec.x * Time.deltaTime * 1000, "y", m_DirVec.y * Time.deltaTime * 1000, "time", 0.3f, "easetype", iTween.EaseType.easeOutQuint));
     }
@@ -218,6 +239,10 @@ public class Player : MonoBehaviour
         m_NormalDamageCol.SetActive(false);
     }
 
+    public void StartVillage()
+    {
+        transform.position = new Vector2(560, -936);
+    }
 
 
     // player moving control
@@ -250,6 +275,7 @@ public class Player : MonoBehaviour
     public void Skill1()
     {
         // active skill 1
+  
         if (GameManager.Instance.g_PlayerCurrentMP > 30)
         {
             m_SkillDamageCol.SetActive(true);
@@ -295,11 +321,11 @@ public class Player : MonoBehaviour
 
             if (m_Vector.x != 0)
             {
-                transform.Translate(m_Vector.x * m_Speed, 0, 0);
+                transform.Translate(m_Vector.x * m_Speed * Time.deltaTime, 0, 0);
             }
             else if (m_Vector.y != 0)
             {
-                transform.Translate(0, m_Vector.y * m_Speed, 0);
+                transform.Translate(0, m_Vector.y * m_Speed * Time.deltaTime, 0);
             }
         }
     }
@@ -313,11 +339,11 @@ public class Player : MonoBehaviour
 
             if (m_Vector.x != 0)
             {
-                transform.Translate(m_Vector.x * m_Speed, 0, 0);
+                transform.Translate(m_Vector.x * m_Speed * Time.deltaTime, 0, 0);
             }
             else if (m_Vector.y != 0)
             {
-                transform.Translate(0, m_Vector.y * m_Speed, 0);
+                transform.Translate(0, m_Vector.y * m_Speed * Time.deltaTime, 0);
             }
 
             if (m_Anim.GetInteger("VerticalMove") != 1)
@@ -342,11 +368,11 @@ public class Player : MonoBehaviour
 
             if (m_Vector.x != 0)
             {
-                transform.Translate(m_Vector.x * m_Speed, 0, 0);
+                transform.Translate(m_Vector.x * m_Speed * Time.deltaTime, 0, 0);
             }
             else if (m_Vector.y != 0)
             {
-                transform.Translate(0, m_Vector.y * m_Speed, 0);
+                transform.Translate(0, m_Vector.y * m_Speed * Time.deltaTime, 0);
             }
 
             if (m_Anim.GetInteger("VerticalMove") != -1)
@@ -371,11 +397,11 @@ public class Player : MonoBehaviour
 
             if (m_Vector.x != 0)
             {
-                transform.Translate(m_Vector.x * m_Speed, 0, 0);
+                transform.Translate(m_Vector.x * m_Speed * Time.deltaTime, 0, 0);
             }
             else if (m_Vector.y != 0)
             {
-                transform.Translate(0, m_Vector.y * m_Speed, 0);
+                transform.Translate(0, m_Vector.y * m_Speed * Time.deltaTime, 0);
             }
 
             if (m_Anim.GetInteger("HorizontalMove") != 1)
@@ -414,5 +440,11 @@ public class Player : MonoBehaviour
         GameManager.Instance.g_PlayerDef = GameManager.Instance.g_PlayerCon / 2; // + item def
         GameManager.Instance.g_PlayerAvd = GameManager.Instance.g_PlayerDex; // + item avd
         GameManager.Instance.g_PlayerCrt = GameManager.Instance.g_PlayerDex; // + item critical
+    }
+
+    public void MassagepanelOn(string massage)
+    {
+        m_MassagePanelTxt.text = massage;
+        m_MassagePanel.SetActive(true);
     }
 }
