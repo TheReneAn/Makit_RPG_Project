@@ -18,6 +18,7 @@ MonoBehaviour:
   itemCount: 1
   itemIcon: {fileID: 21300000, guid: c92333f1231eaff44bca64a225b4ba63, type: 3}
   itemType: 0
+  itemPrice: 150
   thisEvent:
     m_PersistentCalls:
       m_Calls:

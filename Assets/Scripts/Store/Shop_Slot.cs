@@ -9,6 +9,7 @@ public class Shop_Slot : MonoBehaviour
     public Image itemIcon;
     public Text itemName;
     public Text itemPrice;
+    public int temp_itemPrice;
     public Text itemOwnCount;
     public Text show_itemqty;
     public int int_itemqty;
@@ -16,6 +17,7 @@ public class Shop_Slot : MonoBehaviour
     [Header("Variables from the others")]
     public Item thisItem;
     public UI_Store_Sell thisStoreSell;
+    public UI_Store_Buy thisStoreBuy;
 
     public void SellSlot_Setup(Item newItem, UI_Store_Sell newStoreSell)
     {
@@ -25,11 +27,14 @@ public class Shop_Slot : MonoBehaviour
 
         if (thisItem)
         {
+            // When a user sell a item, can not receive the original price
+            temp_itemPrice = (int) (thisItem.itemPrice * 0.8); 
+
             if (thisItem.itemType == Item.ItemType.Use)
             {
                 itemIcon.sprite = thisItem.itemIcon;
                 itemName.text = thisItem.itemName;
-                itemPrice.text = thisItem.itemPrice.ToString();
+                itemPrice.text = temp_itemPrice.ToString();
                 itemOwnCount.text = "" + thisItem.itemCount;
             }
 
@@ -37,7 +42,7 @@ public class Shop_Slot : MonoBehaviour
             {
                 itemIcon.sprite = thisItem.itemIcon;
                 itemName.text = thisItem.itemName;
-                itemPrice.text = thisItem.itemPrice.ToString();
+                itemPrice.text = temp_itemPrice.ToString();
                 itemOwnCount.text = "" + 1;
             }
         }

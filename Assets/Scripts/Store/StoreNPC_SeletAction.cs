@@ -18,6 +18,7 @@ public class StoreNPC_SeletAction : MonoBehaviour
     private Player player;
     private StoreNPC_Phsical this_StoreNPC_Phsical;
     public UI_Store_Sell ui_store_sell;
+    public UI_Store_Buy ui_store_buy;
 
     void Start()
     {
@@ -46,6 +47,8 @@ public class StoreNPC_SeletAction : MonoBehaviour
     {
         // Close this panel
         this_StoreNPC_Phsical.StoreNPC_SelectAction_Panel.SetActive(false);
+
+
 
         Debug.Log("Buy");
     }

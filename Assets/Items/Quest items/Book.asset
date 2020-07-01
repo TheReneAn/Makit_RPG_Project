@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86671b2b492e6334fa03d5a877ed115b, type: 3}
-  m_Name: Paper
+  m_Name: Book
   m_EditorClassIdentifier: 
-  itemID: 300001
-  itemName: Paper
-  itemDescription: paper that is the material of a book
+  itemID: 300005
+  itemName: Book
+  itemDescription: A mysterious book that can change fate.
   itemCount: 1
-  itemIcon: {fileID: 21300000, guid: 615ecf391b0ba0b40a9c3882ac5e6afc, type: 3}
+  itemIcon: {fileID: 21300000, guid: ac11ba5ae2380af48a465ad198896dc3, type: 3}
   itemType: 2
+  itemPrice: 0
   thisEvent:
     m_PersistentCalls:
       m_Calls: []

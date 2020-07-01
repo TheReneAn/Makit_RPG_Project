@@ -80,6 +80,7 @@
      <Compile Include="Assets\Scripts\Inventory\Physical_Item.cs" />
      <Compile Include="Assets\Scripts\Inventory\PlayerInventory.cs" />
      <Compile Include="Assets\Scripts\Item\Item.cs" />
+     <Compile Include="Assets\Scripts\Item\db_Use_item.cs" />
      <Compile Include="Assets\Scripts\MoveMap.cs" />
      <Compile Include="Assets\Scripts\MoveScene.cs" />
      <Compile Include="Assets\Scripts\NormalDamage.cs" />
@@ -96,6 +97,7 @@
      <Compile Include="Assets\Scripts\Store\Shop_Slot.cs" />
      <Compile Include="Assets\Scripts\Store\StoreNPC_Phsical.cs" />
      <Compile Include="Assets\Scripts\Store\StoreNPC_SeletAction.cs" />
+     <Compile Include="Assets\Scripts\Store\UI_Store_Buy.cs" />
      <Compile Include="Assets\Scripts\Store\UI_Store_Sell.cs" />
      <Compile Include="Assets\Scripts\UI\DPadController.cs" />
      <Compile Include="Assets\Scripts\UI\DiagTest.cs" />
