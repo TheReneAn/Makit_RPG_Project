@@ -657,7 +657,7 @@ GameObject:
   - component: {fileID: 1337938736949292311}
   - component: {fileID: 2988228455593449120}
   m_Layer: 5
-  m_Name: Shop_Slot
+  m_Name: Shop_Slots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -741,7 +741,11 @@ MonoBehaviour:
   itemIcon: {fileID: 974827578009926733}
   itemName: {fileID: 974827578089214020}
   itemPrice: {fileID: 974827576735311910}
+  temp_itemPrice: 0
   itemOwnCount: {fileID: 974827577286133419}
   show_itemqty: {fileID: 974827576444654510}
+  int_itemqty: 0
   thisItem: {fileID: 0}
-  thisSellStore: {fileID: 0}
+  thisStoreSell: {fileID: 0}
+  thisStoreBuy: {fileID: 0}
+  errorSound: error

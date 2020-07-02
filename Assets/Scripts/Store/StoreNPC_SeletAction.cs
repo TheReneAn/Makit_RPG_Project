@@ -12,7 +12,9 @@ public class StoreNPC_SeletAction : MonoBehaviour
 
     public Sprite[] Temp_NPC_sprite;
 
+    [Header("Stroe Panel")]
     public GameObject StoreSellPanel;
+    public GameObject StoreBuyPanel;
 
     [Header("Variables from the other")]
     private Player player;
@@ -47,10 +49,12 @@ public class StoreNPC_SeletAction : MonoBehaviour
     {
         // Close this panel
         this_StoreNPC_Phsical.StoreNPC_SelectAction_Panel.SetActive(false);
+        
+        ui_store_buy.Setup(NPC_ID, ShowNPC);
+        ui_store_buy.CloseStoreBuyUI();
+        ui_store_buy.MakeStoreBuySlots();
 
-
-
-        Debug.Log("Buy");
+        StoreBuyPanel.SetActive(true);
     }
 
     public void Btn_Sell()
@@ -61,6 +65,7 @@ public class StoreNPC_SeletAction : MonoBehaviour
         ui_store_sell.Setup(NPC_ID, ShowNPC);
         ui_store_sell.CloseStoreSellUI();
         ui_store_sell.MakeStoreSellSlots();
+
         StoreSellPanel.SetActive(true);
     }
 

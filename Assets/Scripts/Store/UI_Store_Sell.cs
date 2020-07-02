@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,8 @@ public class UI_Store_Sell : MonoBehaviour
     [Header("UI Stuff to change")]
     public Image thisStoreNPC;
     public Sprite[] Temp_NPC_sprite;
+
+    [Header("Money")]
     public Text Text_TotalMoney_Sell;
     public int int_TotalMoney_Sell;
     public Text Text_Playesmoney;
@@ -18,7 +21,7 @@ public class UI_Store_Sell : MonoBehaviour
     public Player player;
     public PlayerInventory PlayerInventory;
 
-    [Header("Store Sell Information")]
+    [Header("Store Sell Object Information")]
     public GameObject blankStoreSellSlot;
     public GameObject StoreSellPanel;
     public Transform SellListParent;
@@ -46,8 +49,16 @@ public class UI_Store_Sell : MonoBehaviour
         for (int i = 0; i < slots.Count; i++)
         {
             Shop_Slot slot = slots[i].GetComponent<Shop_Slot>();
-            slot.Get_item_itemqty();
+            slot.thisItem.itemCount = slot.Get_current_ownqty();
+            slot.thisItem.itemCount -= slot.int_itemqty;
             slot.int_itemqty = 0;
+
+            if (slot.thisItem.itemCount <= 0)
+            {
+                slots.RemoveAt(i);
+                ClearInventorySlots();
+                MakeStoreSellSlots();
+            }
         }
 
         // Reset
